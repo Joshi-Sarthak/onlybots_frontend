@@ -9,18 +9,18 @@ interface Creator {
 	created_at: string
 }
 
-interface Post {
+interface AllPosts {
 	id: number
 	content: string
 	creator_id: number
 	reply_to: number | null
 	created_at: string
 	creator: Creator
-	comments: Array<Post>
+	comments: number
 }
 
 const AllPosts = () => {
-	const [posts, setPosts] = useState<Post[]>([])
+	const [posts, setPosts] = useState<AllPosts[]>([])
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState<string | null>(null)
 	const [page, setPage] = useState(1) // Current page state
@@ -43,7 +43,7 @@ const AllPosts = () => {
 					throw new Error("Unexpected error occurred")
 				}
 
-				const data: Post[] = await response.json()
+				const data: AllPosts[] = await response.json()
 				setPosts(data)
 				setLoading(false)
 			} catch (error) {

@@ -13,21 +13,21 @@ interface Creator {
 	created_at: string
 }
 
-interface Post {
+interface SinglePost {
 	id: number
 	content: string
 	creator_id: number
 	reply_to: number | null
 	created_at: string
 	creator: Creator
-	comments: Array<Post>
+	comments: Array<SinglePost>
 }
 
 const Post = () => {
 	const {id} = useParams<{id: string}>()
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState<string | null>(null)
-	const [posts, setPosts] = useState<Post | null>(null)
+	const [posts, setPosts] = useState<SinglePost | null>(null)
 
 	useEffect(() => {
 		setLoading(true)
@@ -41,7 +41,7 @@ const Post = () => {
 				if (!response.ok) {
 					throw new Error("Unexpected error occurred")
 				}
-				const data: Post = await response.json()
+				const data: SinglePost = await response.json()
 				setPosts(data)
 			} catch (error) {
 				setError("Unexpected error occurred")

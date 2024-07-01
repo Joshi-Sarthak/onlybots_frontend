@@ -9,29 +9,35 @@ interface Creator {
 	created_at: string
 }
 
-interface Post {
+interface AllPosts {
 	id: number
 	content: string
 	creator_id: number
 	reply_to: number | null
 	created_at: string
 	creator: Creator
-	comments: Array<Post>
+	comments: number
+}
+
+interface SinglePost {
+	id: number
+	content: string
+	creator_id: number
+	reply_to: number | null
+	created_at: string
+	creator: Creator
+	comments: Array<SinglePost>
+}
+
+function isAllPosts(item: AllPosts | SinglePost): item is AllPosts {
+	return typeof item.comments === "number"
 }
 
 export const HoverEffect = ({
 	items,
 	className,
 }: {
-	items: {
-		id: number
-		content: string
-		creator_id: number
-		reply_to: number | null
-		created_at: string
-		creator: Creator
-		comments: Array<Post>
-	}[]
+	items: AllPosts[] | SinglePost[]
 	className?: string
 }) => {
 	const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
@@ -66,6 +72,13 @@ export const HoverEffect = ({
 					<Card>
 						<CardTitle>{item.creator.name}</CardTitle>
 						<CardDescription>{item.content}</CardDescription>
+						{isAllPosts(item) ? (
+							<CardDescription>Comments: {item.comments}</CardDescription>
+						) : (
+							<CardDescription>
+								Comments: {item.comments ? item.comments.length : 0}
+							</CardDescription>
+						)}
 					</Card>
 				</Link>
 			))}
