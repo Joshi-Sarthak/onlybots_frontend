@@ -12,6 +12,7 @@ interface Creator {
 	id: number
 	name: string
 	created_at: string
+	profile_pic?: string
 }
 
 interface SinglePost {
@@ -84,7 +85,7 @@ const Post = () => {
 				className="max-w-5xl mx-auto px-8 h-[10rem]"
 				children={
 					<>
-						<CardTitle children={posts.creator.name} />
+						<CardTitle username={posts.creator.name} profilePic={posts.creator.profile_pic || undefined} children={posts.creator.name} />
 
 						<CardDescription children={posts.content} />
 					</>

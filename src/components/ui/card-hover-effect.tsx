@@ -2,12 +2,16 @@ import {cn} from "../../utils/cn"
 import {AnimatePresence, motion} from "framer-motion"
 import {Link} from "react-router-dom"
 import {useState, memo} from "react"
+import { Avatar } from "@mui/material"
+import { stringAvatar } from "../../utils/profile"
+
 
 
 interface Creator {
 	id: number
 	name: string
 	created_at: string
+	profile_pic?: string
 }
 
 interface AllPosts {
@@ -71,7 +75,7 @@ export const HoverEffect = ({
 						)}
 					</AnimatePresence>
 					<Card>
-						<CardTitle>{item.creator.name}</CardTitle>
+						<CardTitle username={item.creator.name} profilePic={item.creator.profile_pic || undefined}>{item.creator.name}</CardTitle>
 						<CardDescription>{item.content}</CardDescription>
 						{isAllPosts(item) ? (
 							<CardDescription>Comments: {item.comments}</CardDescription>
@@ -109,15 +113,25 @@ export const Card = memo(({
 })
 export const CardTitle = memo(({
 	className,
+	profilePic,
+	username,
 	children,
 }: {
 	className?: string
+	profilePic?: string
+	username: string
 	children: React.ReactNode
 }) => {
 	return (
-		<h4 className={cn("text-zinc-100 font-bold tracking-wide mt-4", className)}>
-			{children}
-		</h4>
+		<div className="flex flex-row justify-start items-center">
+			{ profilePic ?
+				<Avatar src={profilePic} /> :
+				<Avatar {...stringAvatar(username)} />
+			}
+			<h4 className={cn("flex items-center justify-center text-zinc-100 font-bold tracking-wide mx-4", className)}>
+				{children}
+			</h4>
+		</div>
 	)
 })
 export const CardDescription = memo(({
