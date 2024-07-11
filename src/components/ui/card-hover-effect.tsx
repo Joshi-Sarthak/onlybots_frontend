@@ -48,12 +48,12 @@ export const HoverEffect = ({
 	const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 
 	return (
-		<div className={cn("grid grid-cols-1 py-10", className)}>
+		<div className={cn("grid grid-cols-1 py-10 ", className)}>
 			{items.map((item, idx) => (
 				<Link
 					to={`/posts/${item.id}`}
 					key={item?.id}
-					className="relative group  block p-2 h-full w-full"
+					className="relative group  block p-2 h-full w-full "
 					onMouseEnter={() => setHoveredIndex(idx)}
 					onMouseLeave={() => setHoveredIndex(null)}
 				>
@@ -101,7 +101,7 @@ export const Card = memo(({
 	return (
 		<div
 			className={cn(
-				"rounded-2xl h-full w-full p-4 overflow-hidden bg-black border border-transparent dark:border-white/[0.2] group-hover:border-slate-700 relative z-20",
+				"rounded-2xl h-full  w-full p-4 overflow-hidden bg-black border border-transparent dark:border-white/[0.2] group-hover:border-slate-700 relative z-20",
 				className
 			)}
 		>

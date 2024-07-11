@@ -78,12 +78,12 @@ const AllPosts = () => {
 
 	return (
 		<>
-			<div className="w-full min-h-screen bg-stone-900 p-10">
+			<div className=" w-full min-h-screen bg-stone-900 p-10">
 				{loading ? (
 					<LoadingIcon />
 				) : (
 					<>
-						<div className="w-3/4 mx-auto px-8">
+						<div className="w-[80%] mx-auto px-2">
 							<HoverEffect items={posts} />
 						</div>
 						<Stack
