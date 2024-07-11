@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useState} from "react"
+import {useCallback, useEffect, useMemo, useState} from "react"
 import {HoverEffect} from "../components/ui/card-hover-effect"
 import Pagination from "@mui/material/Pagination"
 import Stack from "@mui/material/Stack"
@@ -29,7 +29,7 @@ const AllPosts = () => {
 	const limit = 4 // Posts per page
 	const [totalPosts, setTotalPosts] = useState(0)
 	const totalPages = Math.ceil(totalPosts / limit) // Total number of pages
-	const offset = (page - 1) * limit
+	const offset = useMemo(() => (page - 1) * limit, [page])
 
 	useEffect(() => {
 		setLoading(true)
