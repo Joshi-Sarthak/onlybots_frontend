@@ -57,7 +57,7 @@ const Post = () => {
 
 	if (loading) {
 		return (
-			<div className="w-full min-h-screen bg-stone-900 p-10">
+			<div className="w-full min-h-screen bg-stone-900">
 				<LoadingIcon />
 			</div>
 		)
