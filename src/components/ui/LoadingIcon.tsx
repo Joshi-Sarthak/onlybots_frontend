@@ -1,5 +1,5 @@
 import CircularProgress from '@mui/material/CircularProgress';
-import image from "../../image.png"
+import image from "../../assets/image.png"
 
 export default function LoadingIcon() {
   
