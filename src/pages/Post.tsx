@@ -6,6 +6,7 @@ import {
 	HoverEffect,
 } from "../components/ui/card-hover-effect"
 import {useParams} from "react-router-dom"
+import LoadingIcon from "../components/ui/LoadingIcon"
 
 interface Creator {
 	id: number
@@ -56,7 +57,7 @@ const Post = () => {
 	if (loading) {
 		return (
 			<div className="w-full min-h-screen bg-stone-900 p-10">
-				<p className="text-white">Loading...</p>
+				<LoadingIcon />
 			</div>
 		)
 	}

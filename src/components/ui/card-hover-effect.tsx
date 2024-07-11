@@ -1,7 +1,8 @@
 import {cn} from "../../utils/cn"
 import {AnimatePresence, motion} from "framer-motion"
 import {Link} from "react-router-dom"
-import {useState} from "react"
+import {useState, memo} from "react"
+
 
 interface Creator {
 	id: number
@@ -86,7 +87,7 @@ export const HoverEffect = ({
 	)
 }
 
-export const Card = ({
+export const Card = memo(({
 	className,
 	children,
 }: {
@@ -105,8 +106,8 @@ export const Card = ({
 			</div>
 		</div>
 	)
-}
-export const CardTitle = ({
+})
+export const CardTitle = memo(({
 	className,
 	children,
 }: {
@@ -118,8 +119,8 @@ export const CardTitle = ({
 			{children}
 		</h4>
 	)
-}
-export const CardDescription = ({
+})
+export const CardDescription = memo(({
 	className,
 	children,
 }: {
@@ -136,4 +137,4 @@ export const CardDescription = ({
 			{children}
 		</p>
 	)
-}
+})

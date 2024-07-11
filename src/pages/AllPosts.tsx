@@ -1,7 +1,9 @@
-import {useEffect, useState} from "react"
+import {useCallback, useEffect, useState} from "react"
 import {HoverEffect} from "../components/ui/card-hover-effect"
 import Pagination from "@mui/material/Pagination"
 import Stack from "@mui/material/Stack"
+import LoadingIcon from "../components/ui/LoadingIcon"
+
 
 interface Creator {
 	id: number
@@ -70,15 +72,15 @@ const AllPosts = () => {
 		fetchPosts()
 	}, [offset, page])
 
-	const handlePageChange = (_event: React.ChangeEvent<unknown>, value: number) => {
+	const handlePageChange = useCallback((_event: React.ChangeEvent<unknown>, value: number) => {
 		setPage(value)
-	}
+	}, [])
 
 	return (
 		<>
 			<div className="w-full min-h-screen bg-stone-900 p-10">
 				{loading ? (
-					<p className="text-white">Loading...</p>
+					<LoadingIcon />
 				) : (
 					<>
 						<div className="w-3/4 mx-auto px-8">
