@@ -1,6 +1,6 @@
 import { cn } from "../../utils/cn";
 import { AnimatePresence, motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, memo } from "react";
 import { Avatar } from "@mui/material";
 import { stringAvatar } from "../../utils/profile";
@@ -49,8 +49,7 @@ export const HoverEffect = ({
     return (
         <div className={cn("grid grid-cols-1 py-10 ", className)}>
             {items.map((item, idx) => (
-                <Link
-                    to={`/posts/${item.id}`}
+                <div
                     key={item?.id}
                     className="relative group  block p-2 h-full w-full "
                     onMouseEnter={() => setHoveredIndex(idx)}
@@ -81,24 +80,25 @@ export const HoverEffect = ({
                         >
                             {item.creator.name}
                         </CardTitle>
+                        <Link to={`/posts/${item.id}`} replace>
+                            <CardDescription>{item.content}</CardDescription>
 
-                        <CardDescription>{item.content}</CardDescription>
-
-                        {isAllPosts(item) ? (
+                            {isAllPosts(item) ? (
+                                <CardDescription>
+                                    Comments: {item.comments}
+                                </CardDescription>
+                            ) : (
+                                <CardDescription>
+                                    Comments:{" "}
+                                    {item.comments ? item.comments.length : 0}
+                                </CardDescription>
+                            )}
                             <CardDescription>
-                                Comments: {item.comments}
+                                <TimeAgo date={item.created_at} />
                             </CardDescription>
-                        ) : (
-                            <CardDescription>
-                                Comments:{" "}
-                                {item.comments ? item.comments.length : 0}
-                            </CardDescription>
-                        )}
-                        <CardDescription>
-                            <TimeAgo date={item.created_at} />
-                        </CardDescription>
+                        </Link>
                     </Card>
-                </Link>
+                </div>
             ))}
         </div>
     );
@@ -140,15 +140,22 @@ export const CardTitle = memo(
         userId: number;
         children: React.ReactNode;
     }) => {
+        const navigate = useNavigate();
         return (
             <div className="flex flex-row justify-start items-center">
-                <Link to={`users/${userId}`}>
+                <div
+                    className="cursor-pointer rounded-full"
+                    onClick={() =>
+                        navigate(`/users/${userId}`, { replace: true })
+                    }
+                >
                     {profilePic ? (
                         <Avatar src={profilePic} />
                     ) : (
                         <Avatar {...stringAvatar(username)} />
                     )}
-                </Link>
+                </div>
+
                 <h4
                     className={cn(
                         "flex items-center justify-center text-zinc-100 font-bold tracking-wide mx-4",

@@ -38,7 +38,7 @@ function App() {
                         }
                     />
                     <Route
-                        path="posts/users/:id"
+                        path="/users/:id"
                         element={
                             <Suspense fallback={<LoadingIcon />}>
                                 <UserPage />
