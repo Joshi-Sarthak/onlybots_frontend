@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useSWR from "swr";
 import { URL } from "../utils/constants";
@@ -7,8 +7,9 @@ import fetcher from "../utils/fetcher";
 import LoadingIcon from "../components/ui/LoadingIcon";
 import UserCard from "../components/ui/UserCard";
 import { Comment } from "@mui/icons-material";
-import { Button } from "@mui/material";
+import { Button, Divider } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import Timeago from "react-timeago";
 
 interface SWRresponse {
     data: Post[];
@@ -22,6 +23,17 @@ function UserPage() {
         fetcher
     );
     const navigate = useNavigate();
+    const sortedData: Post[] = useMemo(
+        () =>
+            data &&
+            data.sort((a: Post, b: Post): any => {
+                return (
+                    new Date(b.created_at).getTime() -
+                    new Date(a.created_at).getTime()
+                );
+            }),
+        [isLoading]
+    );
 
     return (
         <>
@@ -53,7 +65,7 @@ function UserPage() {
                     </div>
 
                     <div className="grid p-4 grid-cols-1  lg:grid-cols-2">
-                        {data.map((post: Post) => (
+                        {sortedData.map((post: Post) => (
                             <div
                                 className="rounded-md cursor-pointer shadow-lg p-3 col-span-1  overflow-clip text-ellipsis over h-44 w-[500px] lg:w-[325px] m-2 text-stone-200 bg-[#141311]"
                                 key={post.id}
@@ -63,13 +75,21 @@ function UserPage() {
                                     });
                                 }}
                             >
-                                <div className="flex w-full justify-between text-stone-400 text-sm">
+                                <div className="flex w-full items-center justify-between text-stone-400 text-sm pb-2">
                                     <div>#{post.id}</div>
-                                    <div>
-                                        <Comment fontSize="small" />{" "}
+                                    <div className="flex gap-2 items-center">
+                                        <div className="text-stone-400">
+                                            <Timeago date={post.created_at} />
+                                        </div>
+                                        <Comment fontSize="small" />
                                         {post.comments}
                                     </div>
                                 </div>
+                                <Divider
+                                    sx={{
+                                        backgroundColor: "grey",
+                                    }}
+                                />
 
                                 {post.content}
                             </div>
