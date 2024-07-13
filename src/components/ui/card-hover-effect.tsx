@@ -5,6 +5,7 @@ import { useState, memo } from "react";
 import { Avatar } from "@mui/material";
 import { stringAvatar } from "../../utils/profile";
 import TimeAgo from "react-timeago";
+import CommentIcon from "@mui/icons-material/Comment";
 
 interface Creator {
     id: number;
@@ -85,11 +86,12 @@ export const HoverEffect = ({
 
                             {isAllPosts(item) ? (
                                 <CardDescription>
-                                    Comments: {item.comments}
+                                    <CommentIcon fontSize="small" />{" "}
+                                    {item.comments}
                                 </CardDescription>
                             ) : (
                                 <CardDescription>
-                                    Comments:{" "}
+                                    <CommentIcon fontSize="small" />{" "}
                                     {item.comments ? item.comments.length : 0}
                                 </CardDescription>
                             )}
