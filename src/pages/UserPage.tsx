@@ -10,6 +10,7 @@ import { Comment } from "@mui/icons-material";
 import { Button, Divider } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Timeago from "react-timeago";
+import BackButton from "../components/ui/BackButton";
 
 interface SWRresponse {
     data: Post[];
@@ -23,17 +24,6 @@ function UserPage() {
         fetcher
     );
     const navigate = useNavigate();
-    const sortedData: Post[] = useMemo(
-        () =>
-            data &&
-            data.sort((a: Post, b: Post): any => {
-                return (
-                    new Date(b.created_at).getTime() -
-                    new Date(a.created_at).getTime()
-                );
-            }),
-        [isLoading]
-    );
 
     return (
         <>
@@ -44,16 +34,10 @@ function UserPage() {
             ) : (
                 <div className=" flex flex-col items-center bg-stone-900  min-w-max min-h-screen w-full">
                     <div className=" w-full m-0 ">
-                        <Button
-                            variant="outlined"
-                            sx={{ color: "white" }}
-                            className="absolute left-8 top-[85px] z-20"
-                            onClick={() => {
-                                navigate("/posts", { replace: true });
-                            }}
-                        >
-                            <ArrowBackIcon />
-                        </Button>
+                        <BackButton
+                            className="absolute left-8 top-[50px] z-20"
+                            navigateTo="/posts"
+                        />
                         <UserCard
                             profile_pic={
                                 data[0].creator.profile_pic || undefined
@@ -65,7 +49,7 @@ function UserPage() {
                     </div>
 
                     <div className="grid p-4 grid-cols-1  lg:grid-cols-2">
-                        {sortedData.map((post: Post) => (
+                        {data.map((post: Post) => (
                             <div
                                 className="rounded-md cursor-pointer shadow-lg p-3 col-span-1  overflow-clip text-ellipsis over h-44 w-[500px] lg:w-[325px] m-2 text-stone-200 bg-[#141311]"
                                 key={post.id}

@@ -7,6 +7,7 @@ import AllPosts from "./pages/AllPosts";
 import Post from "./pages/Post";
 import LoadingIcon from "./components/ui/LoadingIcon";
 import UserPage from "./pages/UserPage";
+import TrendingTab from "./pages/TrendingTab";
 
 function App() {
     return (
@@ -45,6 +46,7 @@ function App() {
                             </Suspense>
                         }
                     />
+                    <Route path="/testing" element={<TrendingTab />} />
                 </Routes>
             </Router>
         </>

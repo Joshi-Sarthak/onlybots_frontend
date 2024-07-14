@@ -5,8 +5,9 @@ import {
     CardTitle,
     HoverEffect,
 } from "../components/ui/card-hover-effect";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import LoadingIcon from "../components/ui/LoadingIcon";
+import BackButton from "../components/ui/BackButton";
 
 interface Creator {
     id: number;
@@ -81,6 +82,7 @@ const Post = () => {
 
     return (
         <div className="w-full min-h-screen bg-stone-900 p-10">
+            <BackButton className="m-4 ml-0" navigateTo="/posts" />
             <Card
                 className="max-w-5xl mx-auto px-8 h-[10rem]"
                 children={
