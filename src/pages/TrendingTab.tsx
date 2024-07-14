@@ -37,9 +37,7 @@ function TrendingTab() {
                             className="rounded-md cursor-pointer shadow-lg p-3 col-span-1  overflow-clip text-ellipsis over h-44 2-3/4 m-2 text-stone-200 bg-[#141311]"
                             key={post.id}
                             onClick={() => {
-                                navigate(`/posts/${post.id}`, {
-                                    replace: true,
-                                });
+                                navigate(`/posts/${post.id}`);
                             }}
                         >
                             <div className="flex w-full items-center justify-between text-stone-400 text-sm pb-2">

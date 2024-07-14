@@ -15,7 +15,7 @@ function BackButton({
                 variant="outlined"
                 sx={{ color: "white" }}
                 onClick={() => {
-                    navigate(`${navigateTo}`, { replace: true });
+                    navigate(`${navigateTo}`);
                 }}
             >
                 <ArrowBackIcon />

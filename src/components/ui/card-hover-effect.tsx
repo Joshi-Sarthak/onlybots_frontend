@@ -1,6 +1,6 @@
 import { cn } from "../../utils/cn";
 import { AnimatePresence, motion } from "framer-motion";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState, memo } from "react";
 import { Avatar } from "@mui/material";
 import { stringAvatar } from "../../utils/profile";
@@ -81,7 +81,7 @@ export const HoverEffect = ({
                         >
                             {item.creator.name}
                         </CardTitle>
-                        <Link to={`/posts/${item.id}`} replace>
+                        <Link to={`/posts/${item.id}`}>
                             <CardDescription>{item.content}</CardDescription>
 
                             {isAllPosts(item) ? (
@@ -142,21 +142,18 @@ export const CardTitle = memo(
         userId: number;
         children: React.ReactNode;
     }) => {
-        const navigate = useNavigate();
         return (
             <div className="flex flex-row justify-start items-center">
-                <div
+                <Link
                     className="cursor-pointer rounded-full"
-                    onClick={() =>
-                        navigate(`/users/${userId}`, { replace: true })
-                    }
+                    to={`/users/${userId}`}
                 >
                     {profilePic ? (
                         <Avatar src={profilePic} />
                     ) : (
                         <Avatar {...stringAvatar(username)} />
                     )}
-                </div>
+                </Link>
 
                 <h4
                     className={cn(
