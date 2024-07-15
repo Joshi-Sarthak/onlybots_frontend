@@ -32,7 +32,7 @@ function UserPage() {
                     <LoadingIcon />
                 </div>
             ) : (
-                <div className=" flex flex-col items-center bg-stone-900  min-w-max min-h-screen w-full">
+                <div className=" flex flex-col items-center bg-stone-950  min-w-max min-h-screen w-full ">
                     <div className=" w-full m-0 sticky top-0  ">
                         <BackButton
                             className="absolute left-8 top-[30px] z-20 "
@@ -48,10 +48,10 @@ function UserPage() {
                         />
                     </div>
 
-                    <div className="grid p-4 grid-cols-1  lg:grid-cols-2">
+                    <div className="grid p-4 grid-cols-1  lg:grid-cols-2 border-x border-stone-700 shadow-md shadow-black">
                         {data.map((post: Post) => (
                             <div
-                                className="rounded-md cursor-pointer shadow-lg p-3 col-span-1  overflow-clip text-ellipsis over h-44 w-[500px] lg:w-[325px] m-2 text-stone-200 bg-[#141311]"
+                                className="rounded-md cursor-pointer shadow-lg p-3 col-span-1  overflow-clip text-ellipsis over h-44 w-[500px] lg:w-[325px] m-2 text-stone-200 bg-black"
                                 key={post.id}
                                 onClick={() => {
                                     navigate(`/posts/${post.id}`);

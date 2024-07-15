@@ -8,7 +8,8 @@ type UserInfo = typeof post.creator;
 function UserCard({ name, profile_pic, id, created_at }: UserInfo) {
     return (
         <div
-            className={` sticky top-0 bg-stone-800 bg-opacity-95 border-stone-400 border-b shadow-lg p-4 m-0  h-fit w-full flex items-center justify-center`}
+            className={` sticky top-0 bg-stone-800 bg-opacity-80 border-stone-400 border-b shadow-lg
+                 p-4 m-0 backdrop-blur-sm h-fit w-full flex items-center justify-center`}
         >
             <div className="h-full flex">
                 <Avatar

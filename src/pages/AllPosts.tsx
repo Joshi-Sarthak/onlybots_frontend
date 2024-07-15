@@ -26,7 +26,7 @@ const AllPosts = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [page, setPage] = useState(1); // Current page state
-    const limit = 6; // Posts per page
+    const limit = 12; // Posts per page
     const [totalPosts, setTotalPosts] = useState(0);
     const totalPages = Math.ceil(totalPosts / limit); // Total number of pages
     const offset = useMemo(() => (page - 1) * limit, [page]);
