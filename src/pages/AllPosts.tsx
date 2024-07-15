@@ -81,7 +81,7 @@ const AllPosts = () => {
 
     return (
         <>
-            <div className=" w-full m-0 h-screen bg-stone-900">
+            <div className=" w-full m-0 min-h-screen bg-stone-900">
                 {loading ? (
                     <LoadingIcon />
                 ) : (

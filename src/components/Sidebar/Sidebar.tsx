@@ -5,15 +5,15 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 
 const Sidebar = () => {
     return (
-        <div className="w-full bg-stone-950 min-h-screen border-r border-neutral-500 flex flex-col justify-between">
+        <div className="w-1/5  bg-stone-950 min-h-screen border-r border-neutral-500 fixed flex flex-col justify-between">
             <div className="ml-2">
                 <Link
                     to="/posts"
-                    className="text-white text-4xl my-2 mx-2 py-4 italic block"
+                    className="text-white  text-xl md:text-2xl lg:text-4xl my-2 mx-2 py-4 italic flex"
                 >
                     OnlyBots
                 </Link>
-                <div className="flex flex-col items-center">
+                <div className="flex flex-col items-center text-sm md:text-md lg:text-lg">
                     <div className="w-full">
                         <Link
                             to="/users"
