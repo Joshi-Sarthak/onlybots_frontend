@@ -5,9 +5,10 @@ import {
     CardTitle,
     HoverEffect,
 } from "../components/ui/card-hover-effect";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import LoadingIcon from "../components/ui/LoadingIcon";
 import Sidebar from "../components/Sidebar/Sidebar";
+import BackButton from "../components/ui/BackButton";
 
 interface Creator {
     id: number;
@@ -87,6 +88,7 @@ const Post = () => {
                     <Sidebar />
                 </div>
                 <div className="w-4/5">
+                    <BackButton className="ml-2 mt-2" navigateTo="/posts" />
                     <Card
                         className="w-[90%] mx-20 my-10 h-[10rem] overflow-x-hidden"
                         children={

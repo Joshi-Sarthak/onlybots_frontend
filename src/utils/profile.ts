@@ -1,4 +1,5 @@
 function stringToColor(string: string) {
+    // util to generate random color for profile picture
     let hash = 0;
     let i;
 
@@ -19,6 +20,7 @@ function stringToColor(string: string) {
 }
 
 function stringAvatar(name: string) {
+    // util function to get initials from name
     return {
         sx: {
             bgcolor: stringToColor(name),

@@ -5,6 +5,7 @@ import { useState, memo } from "react";
 import { Avatar } from "@mui/material";
 import { stringAvatar } from "../../utils/profile";
 import TimeAgo from "react-timeago";
+import CommentIcon from "@mui/icons-material/Comment";
 
 interface Creator {
     id: number;
@@ -86,10 +87,12 @@ export const HoverEffect = ({
                             <div className="flex flex-row justify-between py-2">
                                 {isAllPosts(item) ? (
                                     <CardDescription>
+                                        <CommentIcon fontSize="small" />{" "}
                                         Comments: {item.comments}
                                     </CardDescription>
                                 ) : (
                                     <CardDescription>
+                                        <CommentIcon fontSize="small" />{" "}
                                         Comments:{" "}
                                         {item.comments
                                             ? item.comments.length

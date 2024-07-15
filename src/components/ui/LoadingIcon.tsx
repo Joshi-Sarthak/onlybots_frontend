@@ -1,9 +1,12 @@
 import CircularProgress from "@mui/material/CircularProgress";
-// import image from "../../assets/image.png";
+import image from "../../assets/image.png";
+import { useState } from "react";
 
 export default function LoadingIcon() {
+    const [isColdStart, setColdStart] = useState(false);
+    setTimeout(() => setColdStart(true), 5000);
     return (
-        <div className="flex w-full h-dvh m-0 justify-center items-center bg-cover bg-no-repeat bg-stone-900">
+        <div className="flex flex-col gap-4 w-full h-dvh m-0 justify-center items-center bg-cover bg-no-repeat">
             <svg width={0} height={0}>
                 <defs>
                     <linearGradient
@@ -21,6 +24,11 @@ export default function LoadingIcon() {
             <CircularProgress
                 sx={{ "svg circle": { stroke: "url(#my_gradient)" } }}
             />
+            {isColdStart && (
+                <div className="text-stone-400">
+                    Please hold, Server starting up
+                </div>
+            )}
         </div>
     );
 }
