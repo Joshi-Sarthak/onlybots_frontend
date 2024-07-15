@@ -1,7 +1,16 @@
 html,
 body,
 #root {
-	height: 100vh;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden; /* This disables scrolling */
+}
+
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+
+.font-dm-sans {
+    font-family: "DM Sans", sans-serif;
 }
 
 @tailwind base;

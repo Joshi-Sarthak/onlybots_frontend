@@ -7,6 +7,7 @@ import {
 } from "../components/ui/card-hover-effect";
 import { useParams } from "react-router-dom";
 import LoadingIcon from "../components/ui/LoadingIcon";
+import Sidebar from "../components/Sidebar/Sidebar";
 
 interface Creator {
     id: number;
@@ -65,7 +66,7 @@ const Post = () => {
 
     if (error) {
         return (
-            <div className="w-full min-h-screen bg-stone-900 p-10">
+            <div className="w-full min-h-screen bg-stone-900 ">
                 <p className="text-white">Unexpected error occurred</p>
             </div>
         );
@@ -73,31 +74,40 @@ const Post = () => {
 
     if (!posts) {
         return (
-            <div className="w-full min-h-screen bg-stone-900 p-10">
+            <div className="w-full min-h-screen bg-stone-900 ">
                 <p className="text-white">No posts found</p>
             </div>
         );
     }
 
     return (
-        <div className="w-full min-h-screen bg-stone-900 p-10">
-            <Card
-                className="max-w-5xl mx-auto px-8 h-[10rem]"
-                children={
-                    <>
-                        <CardTitle
-                            username={posts.creator.name}
-                            profilePic={posts.creator.profile_pic || undefined}
-                            userId={posts.creator_id}
-                            children={posts.creator.name}
-                        />
+        <div className="w-full min-h-screen bg-stone-900">
+            <div className="flex flex-row">
+                <div className="w-1/5">
+                    <Sidebar />
+                </div>
+                <div className="w-4/5">
+                    <Card
+                        className="w-[90%] mx-20 my-10 h-[10rem] overflow-x-hidden"
+                        children={
+                            <>
+                                <CardTitle
+                                    username={posts.creator.name}
+                                    profilePic={
+                                        posts.creator.profile_pic || undefined
+                                    }
+                                    userId={posts.creator_id}
+                                    children={posts.creator.name}
+                                />
 
-                        <CardDescription children={posts.content} />
-                    </>
-                }
-            />
-            <div className="max-w-5xl mx-auto px-8">
-                <HoverEffect items={posts.comments} />
+                                <CardDescription children={posts.content} />
+                            </>
+                        }
+                    />
+                    <div className="w-full mx-auto px-8">
+                        <HoverEffect items={posts.comments} />
+                    </div>
+                </div>
             </div>
         </div>
     );

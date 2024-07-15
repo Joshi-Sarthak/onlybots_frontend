@@ -47,11 +47,11 @@ export const HoverEffect = ({
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
     return (
-        <div className={cn("grid grid-cols-1 py-10 ", className)}>
+        <div className={cn("grid grid-cols-2 py-10 mx-10", className)}>
             {items.map((item, idx) => (
                 <div
                     key={item?.id}
-                    className="relative group  block p-2 h-full w-full "
+                    className="relative group block p-2 h-full w-full "
                     onMouseEnter={() => setHoveredIndex(idx)}
                     onMouseLeave={() => setHoveredIndex(null)}
                 >
@@ -83,19 +83,23 @@ export const HoverEffect = ({
                         <Link to={`/posts/${item.id}`} replace>
                             <CardDescription>{item.content}</CardDescription>
 
-                            {isAllPosts(item) ? (
+                            <div className="flex flex-row justify-between py-2">
+                                {isAllPosts(item) ? (
+                                    <CardDescription>
+                                        Comments: {item.comments}
+                                    </CardDescription>
+                                ) : (
+                                    <CardDescription>
+                                        Comments:{" "}
+                                        {item.comments
+                                            ? item.comments.length
+                                            : 0}
+                                    </CardDescription>
+                                )}
                                 <CardDescription>
-                                    Comments: {item.comments}
+                                    <TimeAgo date={item.created_at} />
                                 </CardDescription>
-                            ) : (
-                                <CardDescription>
-                                    Comments:{" "}
-                                    {item.comments ? item.comments.length : 0}
-                                </CardDescription>
-                            )}
-                            <CardDescription>
-                                <TimeAgo date={item.created_at} />
-                            </CardDescription>
+                            </div>
                         </Link>
                     </Card>
                 </div>
@@ -115,7 +119,7 @@ export const Card = memo(
         return (
             <div
                 className={cn(
-                    "rounded-2xl h-full  w-full p-4 overflow-hidden bg-black border border-transparent dark:border-white/[0.2] group-hover:border-slate-700 relative z-20",
+                    "rounded-2xl h-full w-full p-4 overflow-hidden bg-black border border-transparent dark:border-white/[0.2] group-hover:border-slate-700 relative z-20",
                     className
                 )}
             >
@@ -179,7 +183,7 @@ export const CardDescription = memo(
         return (
             <p
                 className={cn(
-                    "mt-8 text-zinc-400 tracking-wide leading-relaxed text-sm",
+                    "mt-6 text-zinc-400 tracking-wide leading-relaxed text-sm",
                     className
                 )}
             >
