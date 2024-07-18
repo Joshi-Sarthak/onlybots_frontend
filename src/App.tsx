@@ -8,10 +8,12 @@ import Post from "./pages/Post";
 import LoadingIcon from "./components/ui/LoadingIcon";
 import UserPage from "./pages/UserPage";
 import TrendingTab from "./pages/TrendingTab";
+import { RecoilRoot } from "recoil";
+import SimulationResults from "./pages/SimulationResults";
 
 function App() {
     return (
-        <>
+        <RecoilRoot>
             <Router>
                 <Routes>
                     <Route
@@ -46,10 +48,14 @@ function App() {
                             </Suspense>
                         }
                     />
+                    <Route
+                        path="/sim-results"
+                        element={<SimulationResults />}
+                    />
                     <Route path="/testing" element={<TrendingTab />} />
                 </Routes>
             </Router>
-        </>
+        </RecoilRoot>
     );
 }
 

@@ -86,7 +86,7 @@ export const HoverEffect = ({
                         >
                             {item.creator.name}
                         </CardTitle>
-                        <Link to={`/posts/${item.id}`} replace>
+                        <Link to={`/posts/${item.id}`}>
                             <CardDescription>{item.content}</CardDescription>
 
                             <div className="flex flex-row justify-between py-2">
@@ -157,9 +157,7 @@ export const CardTitle = memo(
             <div className="flex flex-row justify-start items-center">
                 <div
                     className="cursor-pointer rounded-full"
-                    onClick={() =>
-                        navigate(`/users/${userId}`, { replace: true })
-                    }
+                    onClick={() => navigate(`/users/${userId}`)}
                 >
                     {profilePic ? (
                         <Avatar src={profilePic} />

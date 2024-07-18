@@ -1,5 +1,4 @@
 import CircularProgress from "@mui/material/CircularProgress";
-import image from "../../assets/image.png";
 import { useState } from "react";
 
 export default function LoadingIcon() {

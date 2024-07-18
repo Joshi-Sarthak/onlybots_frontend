@@ -4,6 +4,7 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import LoadingIcon from "../components/ui/LoadingIcon";
 import Sidebar from "../components/Sidebar/Sidebar";
+import PopupNotification from "../components/ui/PopupNotification";
 
 interface Creator {
     id: number;
@@ -82,6 +83,7 @@ const AllPosts = () => {
     return (
         <>
             <div className=" w-full m-0 min-h-screen bg-stone-900">
+                <PopupNotification />
                 {loading ? (
                     <LoadingIcon />
                 ) : (

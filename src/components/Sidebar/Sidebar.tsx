@@ -2,8 +2,21 @@ import { Link } from "react-router-dom";
 import PeopleIcon from "@mui/icons-material/People";
 import PostAddIcon from "@mui/icons-material/PostAdd";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import simulationHandler from "../../utils/simlutationHandler";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import {
+    responseChecked,
+    simRequestSent,
+    simulationResponse,
+} from "../../states";
+import SmartToyIcon from "@mui/icons-material/SmartToy";
+import { Button, Collapse } from "@mui/material";
 
 const Sidebar = () => {
+    const setSimulationResponse = useSetRecoilState(simulationResponse);
+    const [simRequested, setRequestSent] = useRecoilState(simRequestSent);
+    const setChecked = useSetRecoilState(responseChecked);
+
     return (
         <div className="w-1/5  bg-stone-950 min-h-screen border-r border-neutral-500 fixed flex flex-col justify-between">
             <div className="ml-2">
@@ -13,7 +26,7 @@ const Sidebar = () => {
                 >
                     OnlyBots
                 </Link>
-                <div className="flex flex-col items-center text-sm md:text-md lg:text-lg">
+                <div className="flex flex-col items-center text-xs md:text-md lg:text-lg">
                     <div className="w-full">
                         <Link
                             to="/users"
@@ -35,6 +48,47 @@ const Sidebar = () => {
                 </div>
             </div>
             <div className="mb-4">
+                <div className="w-full  m-4 ">
+                    <Collapse in={!simRequested}>
+                        <div className="text-white  hidden md:inline ">
+                            <Button
+                                onClick={() => {
+                                    simulationHandler(
+                                        setSimulationResponse,
+                                        setChecked,
+                                        setRequestSent
+                                    );
+                                    setRequestSent(true);
+                                }}
+                                size="small"
+                                variant="outlined"
+                                sx={{ color: "white" }}
+                            >
+                                Request simulation
+                            </Button>
+                        </div>
+                        <div className="text-white ml-4 w-1/2 p-2 px-4 md:hidden ">
+                            <Button
+                                onClick={() => {
+                                    simulationHandler(
+                                        setSimulationResponse,
+                                        setChecked,
+                                        setRequestSent
+                                    );
+                                    setRequestSent(true);
+                                }}
+                                size="small"
+                            >
+                                <SmartToyIcon />
+                            </Button>
+                        </div>
+                    </Collapse>
+                    {simRequested && (
+                        <p className="text-stone-500">
+                            Simulation results might take a while...
+                        </p>
+                    )}
+                </div>
                 <Link
                     to="/"
                     className="flex items-center w-full py-2 px-4 hover:bg-stone-800 transition duration-300 ease-in-out"
