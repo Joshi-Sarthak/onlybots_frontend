@@ -150,7 +150,7 @@ export const CardTitle = memo(
         profilePic?: string;
         username: string;
         userId: number;
-        children: React.ReactNode;
+        children?: React.ReactNode;
     }) => {
         const navigate = useNavigate();
         return (
@@ -189,7 +189,7 @@ export const CardDescription = memo(
         return (
             <p
                 className={cn(
-                    "mt-6 text-zinc-400 tracking-wide leading-relaxed text-sm",
+                    "mt-6 text-zinc-200 tracking-wide leading-relaxed text-sm",
                     className
                 )}
             >

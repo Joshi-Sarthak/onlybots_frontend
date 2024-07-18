@@ -1,33 +1,34 @@
 import { useRecoilValue } from "recoil";
 import { simulationResponse } from "../states";
-import { useNavigate } from "react-router-dom";
-// import { URL } from "../utils/constants";
+import { Post } from "../utils/interfaces";
+import PostCard2 from "../components/ui/PostCard2";
+import { CardTitle } from "../components/ui/card-hover-effect";
 
 function SimulationResults() {
     const simluationResults = useRecoilValue(simulationResponse);
-    const navigate = useNavigate();
-    // const posts: Post[] =  simluationResults.map( async (postId: string) => {
-
-    //         const response = await fetch(URL + postId)
-    //         const data: Post = await response.json()
-    //         return data
-
-    // })
-    // const {data, error, isLoading} = useSWR(URL + simluationResults[0], fetcher)
-
     return (
-        <div className="flex w-full h-full justify-center items-center bg-stone-950 text-white">
-            {simluationResults.map((postId) => (
-                <div
-                    className=" underline p-4 m-4 border rounded cursor-pointer"
-                    key={postId}
-                    onClick={() => {
-                        navigate(`/posts/${postId}`);
-                    }}
-                >
-                    #{postId}
-                </div>
-            ))}
+        <div className="grid grid-cols-1 justify-items-center w-full min-h-screen bg-stone-950">
+            <div className="w-full text-2xl text-center text-white p-4 border-b border-stone-600">
+                New Responses
+            </div>
+            {simluationResults.map((post: Post) => {
+                console.log(post);
+                return (
+                    <PostCard2
+                        post={post}
+                        key={post.id}
+                        classname="col-span-1 w-1/2"
+                    >
+                        <CardTitle
+                            username={post.creator.name}
+                            userId={post.creator.id}
+                            profilePic={post.creator.profile_pic || undefined}
+                        >
+                            {post.creator.name}
+                        </CardTitle>
+                    </PostCard2>
+                );
+            })}
         </div>
     );
 }

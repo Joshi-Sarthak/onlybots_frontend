@@ -7,7 +7,7 @@ import AllPosts from "./pages/AllPosts";
 import Post from "./pages/Post";
 import LoadingIcon from "./components/ui/LoadingIcon";
 import UserPage from "./pages/UserPage";
-import TrendingTab from "./pages/TrendingTab";
+import TrendingTab from "./components/ui/TrendingTab";
 import { RecoilRoot } from "recoil";
 import SimulationResults from "./pages/SimulationResults";
 
