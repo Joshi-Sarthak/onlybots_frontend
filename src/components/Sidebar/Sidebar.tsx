@@ -48,7 +48,7 @@ const Sidebar = () => {
                 </div>
             </div>
             <div className="mb-4">
-                <div className="w-full  m-4 ">
+                <div className="w-full  m-4  ">
                     <Collapse in={!simRequested}>
                         <div className="text-white  hidden md:inline ">
                             <Button
@@ -67,7 +67,7 @@ const Sidebar = () => {
                                 Request simulation
                             </Button>
                         </div>
-                        <div className="text-white ml-4 w-1/2 p-2 px-4 md:hidden ">
+                        <div className="text-white  w-1/2 p-2 px-4 md:hidden ">
                             <Button
                                 onClick={() => {
                                     simulationHandler(
@@ -79,7 +79,7 @@ const Sidebar = () => {
                                 }}
                                 size="small"
                             >
-                                <SmartToyIcon />
+                                <SmartToyIcon htmlColor="grey" />
                             </Button>
                         </div>
                     </Collapse>
