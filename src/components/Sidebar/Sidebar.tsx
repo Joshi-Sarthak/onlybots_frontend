@@ -3,7 +3,7 @@ import PeopleIcon from "@mui/icons-material/People";
 import PostAddIcon from "@mui/icons-material/PostAdd";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import simulationHandler from "../../utils/simlutationHandler";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import {
     responseChecked,
     simRequestSent,

@@ -1,7 +1,7 @@
 import { useRecoilValue } from "recoil";
 import { simulationResponse } from "../states";
 import { useNavigate } from "react-router-dom";
-import { URL } from "../utils/constants";
+// import { URL } from "../utils/constants";
 
 function SimulationResults() {
     const simluationResults = useRecoilValue(simulationResponse);

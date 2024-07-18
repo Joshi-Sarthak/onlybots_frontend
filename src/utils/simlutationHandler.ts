@@ -1,6 +1,5 @@
-import { SetterOrUpdater, useSetRecoilState } from "recoil";
+import { SetterOrUpdater } from "recoil";
 import { URL_AI } from "./constants";
-import { responseChecked, simRequestSent } from "../states";
 
 export default async function simulationHandler(
     setSimulationResponse: SetterOrUpdater<string[]>,
