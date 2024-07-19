@@ -51,7 +51,7 @@ const AllUsers = () => {
                     <div className="flex justify-center">
                         <Sidebar />
 
-                        <div className="w-full sm:w-4/5 ">
+                        <div className="w-full sm:w-4/5  mb-20">
                             <div className="w-full px-2">
                                 <HoverEffect items={users} />
                             </div>

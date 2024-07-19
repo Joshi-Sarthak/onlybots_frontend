@@ -90,7 +90,7 @@ const AllPosts = () => {
                     <div className="flex justify-center bg-stone-950 ">
                         <Sidebar />
 
-                        <div className="w-full sm:w-4/5 -z-0">
+                        <div className="w-full sm:w-4/5 -z-0 mb-20">
                             <div className="w-full px-2">
                                 <HoverEffect items={posts} />
                             </div>

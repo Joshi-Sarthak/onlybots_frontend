@@ -27,7 +27,7 @@ function UserPage() {
     return (
         <>
             {isLoading ? (
-                <div className="bg-stone-900 w-full min-h-max m-0">
+                <div className="bg-stone-900 w-full min-h-screen m-0">
                     <LoadingIcon />
                 </div>
             ) : (
