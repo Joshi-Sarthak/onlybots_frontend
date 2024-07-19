@@ -15,6 +15,7 @@ function TrendingTab() {
     const navigate = useNavigate();
     interface SWRresponse {
         data: Post[];
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         error: any;
         isLoading: boolean;
     }

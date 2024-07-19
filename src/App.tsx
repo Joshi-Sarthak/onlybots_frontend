@@ -10,6 +10,7 @@ import UserPage from "./pages/UserPage";
 import TrendingTab from "./pages/TrendingTab";
 import { RecoilRoot } from "recoil";
 import SimulationResults from "./pages/SimulationResults";
+import AllUsers from "./pages/AllUsers";
 
 function App() {
     return (
@@ -52,6 +53,7 @@ function App() {
                         path="/sim-results"
                         element={<SimulationResults />}
                     />
+                    <Route path="/users" element={<AllUsers />} />
                     <Route path="/testing" element={<TrendingTab />} />
                 </Routes>
             </Router>

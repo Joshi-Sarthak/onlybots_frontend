@@ -5,9 +5,10 @@ import {
     CardTitle,
     HoverEffect,
 } from "../components/ui/card-hover-effect";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import LoadingIcon from "../components/ui/LoadingIcon";
 import Sidebar from "../components/Sidebar/Sidebar";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
 interface Creator {
     id: number;
@@ -31,6 +32,7 @@ const Post = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [posts, setPosts] = useState<SinglePost | null>(null);
+    const [reply_to, setReply_to] = useState<number | null>(null);
 
     useEffect(() => {
         setLoading(true);
@@ -46,6 +48,7 @@ const Post = () => {
                 }
                 const data: SinglePost = await response.json();
                 setPosts(data);
+                setReply_to(data.reply_to);
             } catch (error) {
                 setError("Unexpected error occurred");
             } finally {
@@ -87,6 +90,17 @@ const Post = () => {
                     <Sidebar />
                 </div>
                 <div className="w-4/5">
+                    {reply_to && (
+                        <Link
+                            to={`/posts/${reply_to}`}
+                            className="flex flex-row p-4"
+                        >
+                            <ArrowBackIosNewIcon className="text-neutral-200 my-[0.2rem] mx-3" />
+                            <p className="text-neutral-200 font-semibold text-xl">
+                                Original post
+                            </p>
+                        </Link>
+                    )}
                     <Card
                         className="w-[90%] mx-20 my-10 h-[10rem] overflow-x-hidden"
                         children={

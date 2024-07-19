@@ -13,6 +13,7 @@ import Sidebar from "../components/Sidebar/Sidebar";
 
 interface SWRresponse {
     data: Post[];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     error: any;
     isLoading: boolean;
 }

@@ -34,15 +34,26 @@ interface SinglePost {
     comments: Array<SinglePost>;
 }
 
+interface Users {
+    id: number;
+    name: string;
+    profile_pic: string;
+    created_at: string;
+}
+
 function isAllPosts(item: AllPosts | SinglePost): item is AllPosts {
     return typeof item.comments === "number";
+}
+
+function isUsers(item: AllPosts | SinglePost | Users): item is Users {
+    return (item as Users).name !== undefined;
 }
 
 export const HoverEffect = ({
     items,
     className,
 }: {
-    items: AllPosts[] | SinglePost[];
+    items: AllPosts[] | SinglePost[] | Users[];
     className?: string;
 }) => {
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -64,7 +75,7 @@ export const HoverEffect = ({
                     <AnimatePresence>
                         {hoveredIndex === idx && (
                             <motion.span
-                                className="absolute inset-0 h-full w-full bg-neutral-200 dark:bg-stone-600/[0.8] block  rounded-3xl"
+                                className="absolute inset-0 h-full w-full bg-neutral-200 dark:bg-stone-600/[0.8] block rounded-3xl"
                                 layoutId="hoverBackground"
                                 initial={{ opacity: 0 }}
                                 animate={{
@@ -78,43 +89,65 @@ export const HoverEffect = ({
                             />
                         )}
                     </AnimatePresence>
-                    <Card>
-                        <CardTitle
-                            username={item.creator.name}
-                            profilePic={item.creator.profile_pic || undefined}
-                            userId={item.creator_id}
-                        >
-                            {item.creator.name}
-                        </CardTitle>
-                        <Link to={`/posts/${item.id}`}>
-                            <CardDescription>{item.content}</CardDescription>
-
-                            <div className="flex flex-row justify-between py-2">
-                                {isAllPosts(item) ? (
-                                    <CardDescription>
-                                        <CommentIcon fontSize="small" />{" "}
-                                        Comments: {item.comments}
-                                    </CardDescription>
-                                ) : (
-                                    <CardDescription>
-                                        <CommentIcon fontSize="small" />{" "}
-                                        Comments:{" "}
-                                        {item.comments
-                                            ? item.comments.length
-                                            : 0}
-                                    </CardDescription>
-                                )}
-                                <CardDescription>
-                                    <TimeAgo date={item.created_at} />
-                                </CardDescription>
-                            </div>
-                        </Link>
-                    </Card>
+                    {isUsers(item) ? (
+                        <UserCard user={item} />
+                    ) : (
+                        <PostCard post={item} />
+                    )}
                 </div>
             ))}
         </div>
     );
 };
+
+export const PostCard = memo(({ post }: { post: AllPosts | SinglePost }) => (
+    <Card>
+        <CardTitle
+            username={post.creator.name}
+            profilePic={post.creator.profile_pic || undefined}
+            userId={post.creator_id}
+        >
+            {post.creator.name}
+        </CardTitle>
+        <Link to={`/posts/${post.id}`}>
+            <CardDescription>{post.content}</CardDescription>
+
+            <div className="flex flex-row justify-between py-2">
+                {isAllPosts(post) ? (
+                    <CardDescription>
+                        <CommentIcon fontSize="small" /> Comments:{" "}
+                        {post.comments}
+                    </CardDescription>
+                ) : (
+                    <CardDescription>
+                        <CommentIcon fontSize="small" /> Comments:{" "}
+                        {post.comments ? post.comments.length : 0}
+                    </CardDescription>
+                )}
+                <CardDescription>
+                    <TimeAgo date={post.created_at} />
+                </CardDescription>
+            </div>
+        </Link>
+    </Card>
+));
+
+export const UserCard = memo(({ user }: { user: Users }) => (
+    <Card>
+        <Link to={`/users/${user.id}`}>
+            <CardTitle
+                username={user.name}
+                profilePic={user.profile_pic || undefined}
+                userId={user.id}
+            >
+                {user.name}
+            </CardTitle>
+            <CardDescription>
+                Joined: <TimeAgo date={user.created_at} />
+            </CardDescription>
+        </Link>
+    </Card>
+));
 
 export const Card = memo(
     ({
