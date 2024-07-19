@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import PeopleIcon from "@mui/icons-material/People";
 import PostAddIcon from "@mui/icons-material/PostAdd";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import SmartToyIcon from "@mui/icons-material/SmartToy";
 import simulationHandler from "../../utils/simlutationHandler";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import {
@@ -10,7 +11,6 @@ import {
     simRequestSent,
     simulationResponse,
 } from "../../states";
-import SmartToyIcon from "@mui/icons-material/SmartToy";
 import { Collapse } from "@mui/material";
 import FixedBottomNavigation from "../ui/FixedBottomNavbar";
 

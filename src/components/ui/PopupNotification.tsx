@@ -7,7 +7,10 @@ function PopupNotification() {
     const [checked, setChecked] = useRecoilState(responseChecked);
     const navigate = useNavigate();
     return (
-        <Collapse in={checked}>
+        <Collapse
+            in={checked}
+            // sx={{ position: "fixed", top: 0, left: 0, right: 0 }}
+        >
             <Alert
                 severity="info"
                 onClose={() => setChecked(false)}
