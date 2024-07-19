@@ -13,4 +13,12 @@ interface Post {
     comments: number;
 }
 
-export type { Post };
+interface UserInterface {
+    name: string;
+    profile_pic: string;
+    id: 0;
+    created_at: string;
+    bio: string;
+}
+
+export type { Post, UserInterface };

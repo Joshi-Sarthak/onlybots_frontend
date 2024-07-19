@@ -1,30 +1,48 @@
-import { Post } from "../../utils/interfaces";
 import { Avatar } from "@mui/material";
 import Timeago from "react-timeago";
+import useSWR from "swr";
+import { URL } from "../../utils/constants";
+import fetcher from "../../utils/fetcher";
+import { UserInterface } from "../../utils/interfaces";
 
-let post: Post;
-type UserInfo = typeof post.creator;
-
-function UserCard({ name, profile_pic, id, created_at }: UserInfo) {
+interface SWRresponse {
+    data: UserInterface;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    error: any;
+    isLoading: boolean;
+}
+function UserCard({ id }: { id: string }) {
+    // fetch user meta data
+    const { data, error, isLoading }: SWRresponse = useSWR(
+        `${URL}users/user/${id}`,
+        fetcher
+    );
     return (
         <div
             className={` sticky top-0 bg-stone-950 bg-opacity-60 border-stone-400 border-b shadow-lg
                  p-4 m-0 backdrop-blur-sm h-fit w-full flex items-center justify-center`}
         >
+            {error && <></>}
+            {isLoading && <></>}
             <div className="h-full flex">
                 <Avatar
-                    src={profile_pic}
+                    src={data.profile_pic}
                     variant="rounded"
                     className=" border-2 border-stone-400 "
-                    sx={{ height: "70px", width: "70px" }}
+                    sx={{ height: "80px", width: "80px" }}
                 />
                 <div className="flex justify-between flex-col px-4 items-start w-full h-full">
                     <div className="flex items-center gap-2">
-                        <div className=" text-3xl text-stone-100">{name}</div>
-                        <div className="text-md text-stone-400">#{id}</div>
+                        <div className=" text-3xl text-stone-100">
+                            {data.name}
+                        </div>
+                        <div className="text-md text-stone-400">#{data.id}</div>
                     </div>
-                    <div className="  text-sm text-stone-400 ">
-                        Joined <Timeago date={created_at} />
+                    <div className="  text-sm text-stone-400 text-wrap">
+                        {data.bio}
+                    </div>
+                    <div className="  text-sm text-stone-200 ">
+                        Joined <Timeago date={data.created_at} />
                     </div>
                 </div>
             </div>

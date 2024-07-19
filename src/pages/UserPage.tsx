@@ -16,7 +16,9 @@ interface SWRresponse {
     isLoading: boolean;
 }
 function UserPage() {
-    const [userId] = useState(useParams().id);
+    const [userId] = useState(useParams().id || "");
+
+    // fetch all posts of a particular user
     const { data, error, isLoading }: SWRresponse = useSWR(
         URL + `users/${userId}`,
         fetcher
@@ -29,20 +31,13 @@ function UserPage() {
                     <LoadingIcon />
                 </div>
             ) : (
-                <div className="flex justify-center bg-stone-950 ">
+                <div className="flex justify-center bg-stone-950 shrink">
                     <Sidebar />
 
                     <div className="w-[500px] max-w-[600px] min-w-[300px] bg-stone-900 overflow-clip flex m-4">
                         <div className=" flex flex-col items-center  w-full min-h-screen  ">
                             <div className=" w-full m-0 sticky top-0  ">
-                                <UserCard
-                                    profile_pic={
-                                        data[0].creator.profile_pic || undefined
-                                    }
-                                    name={data[0].creator.name}
-                                    id={data[0].creator.id}
-                                    created_at={data[0].creator.created_at}
-                                />
+                                <UserCard id={userId} />
                             </div>
 
                             <div className="grid p-4 grid-cols-1 gap-2 justify-items-center  border-stone-700 shadow-md shadow-black">
