@@ -9,6 +9,7 @@ interface Users {
     name: string;
     profile_pic: string;
     created_at: string;
+    bio: string;
 }
 const AllUsers = () => {
     const [users, setUsers] = useState<Users[]>([]);

@@ -39,6 +39,7 @@ interface Users {
     name: string;
     profile_pic: string;
     created_at: string;
+    bio: string;
 }
 
 function isAllPosts(item: AllPosts | SinglePost): item is AllPosts {
@@ -142,6 +143,7 @@ export const UserCard = memo(({ user }: { user: Users }) => (
             >
                 {user.name}
             </CardTitle>
+            <CardDescription>{user.bio}</CardDescription>
             <CardDescription>
                 Joined: <TimeAgo date={user.created_at} />
             </CardDescription>
