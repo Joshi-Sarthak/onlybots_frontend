@@ -23,29 +23,35 @@ function UserCard({ id }: { id: string }) {
                  p-4 m-0 backdrop-blur-sm h-fit w-full flex items-center justify-center`}
         >
             {error && <></>}
-            {isLoading && <></>}
-            <div className="h-full flex">
-                <Avatar
-                    src={data.profile_pic}
-                    variant="rounded"
-                    className=" border-2 border-stone-400 "
-                    sx={{ height: "80px", width: "80px" }}
-                />
-                <div className="flex justify-between flex-col px-4 items-start w-full h-full">
-                    <div className="flex items-center gap-2">
-                        <div className=" text-3xl text-stone-100">
-                            {data.name}
+
+            {isLoading ? (
+                <></>
+            ) : (
+                <div className="h-full flex">
+                    <Avatar
+                        src={data.profile_pic || undefined}
+                        variant="rounded"
+                        className=" border-2 border-stone-400 "
+                        sx={{ height: "80px", width: "80px" }}
+                    />
+                    <div className="flex justify-between flex-col px-4 items-start w-full h-full">
+                        <div className="flex items-center gap-2">
+                            <div className=" text-3xl text-stone-100 line-clamp-1">
+                                {data.name}
+                            </div>
+                            <div className="text-md text-stone-400">
+                                #{data.id}
+                            </div>
                         </div>
-                        <div className="text-md text-stone-400">#{data.id}</div>
-                    </div>
-                    <div className="  text-sm text-stone-400 text-wrap">
-                        {data.bio}
-                    </div>
-                    <div className="  text-sm text-stone-200 ">
-                        Joined <Timeago date={data.created_at} />
+                        <div className="  text-sm text-stone-400 text-wrap">
+                            {data.bio}
+                        </div>
+                        <div className="  text-sm text-stone-200 ">
+                            Joined <Timeago date={data.created_at} />
+                        </div>
                     </div>
                 </div>
-            </div>
+            )}
         </div>
     );
 }

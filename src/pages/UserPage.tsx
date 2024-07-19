@@ -31,10 +31,10 @@ function UserPage() {
                     <LoadingIcon />
                 </div>
             ) : (
-                <div className="flex justify-center bg-stone-950 shrink">
+                <div className="flex justify-center bg-stone-950 z-50">
                     <Sidebar />
 
-                    <div className="w-[500px] max-w-[600px] min-w-[300px] bg-stone-900 overflow-clip flex m-4">
+                    <div className="w-[500px] max-w-[600px] min-w-[300px] bg-stone-900 flex m-4">
                         <div className=" flex flex-col items-center  w-full min-h-screen  ">
                             <div className=" w-full m-0 sticky top-0  ">
                                 <UserCard id={userId} />
