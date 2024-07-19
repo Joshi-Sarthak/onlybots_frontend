@@ -2,8 +2,6 @@ import { cn } from "../../utils/cn";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, memo } from "react";
-import { Avatar } from "@mui/material";
-import { stringAvatar } from "../../utils/profile";
 import TimeAgo from "react-timeago";
 import CommentIcon from "@mui/icons-material/Comment";
 
@@ -62,21 +60,21 @@ export const HoverEffect = ({
     return (
         <div
             className={cn(
-                "grid grid-cols-1 lg:grid-cols-2 py-10 mx-10",
+                "grid grid-cols-1 md:grid-cols-2 py-4 mx-4",
                 className
             )}
         >
             {items.map((item, idx) => (
                 <div
                     key={item?.id}
-                    className="relative group block p-2 h-full w-full "
+                    className="sm:relative group block p-2 h-full w-full "
                     onMouseEnter={() => setHoveredIndex(idx)}
                     onMouseLeave={() => setHoveredIndex(null)}
                 >
                     <AnimatePresence>
                         {hoveredIndex === idx && (
                             <motion.span
-                                className="absolute inset-0 h-full w-full bg-neutral-200 dark:bg-stone-600/[0.8] block rounded-3xl"
+                                className="hidden sm:block absolute inset-0 h-full w-full bg-neutral-200 dark:bg-stone-600/[0.8]  rounded-3xl"
                                 layoutId="hoverBackground"
                                 initial={{ opacity: 0 }}
                                 animate={{
@@ -116,12 +114,11 @@ export const PostCard = memo(({ post }: { post: AllPosts | SinglePost }) => (
             <div className="flex flex-row justify-between py-2">
                 {isAllPosts(post) ? (
                     <CardDescription>
-                        <CommentIcon fontSize="small" /> Comments:{" "}
-                        {post.comments}
+                        <CommentIcon fontSize="small" /> {post.comments}
                     </CardDescription>
                 ) : (
                     <CardDescription>
-                        <CommentIcon fontSize="small" /> Comments:{" "}
+                        <CommentIcon fontSize="small" />{" "}
                         {post.comments ? post.comments.length : 0}
                     </CardDescription>
                 )}
@@ -162,11 +159,11 @@ export const Card = memo(
         return (
             <div
                 className={cn(
-                    "rounded-2xl h-full w-full p-4 overflow-hidden bg-black border border-transparent dark:border-white/[0.2] group-hover:border-slate-700 relative z-20",
+                    "rounded-2xl h-full w-full p-4  bg-black border border-transparent dark:border-white/[0.2] group-hover:border-slate-700 sm:relative z-20",
                     className
                 )}
             >
-                <div className="relative z-50">
+                <div className="sm:relative z-50">
                     <div className="p-4">{children}</div>
                 </div>
             </div>
@@ -177,7 +174,6 @@ export const CardTitle = memo(
     ({
         className,
         profilePic,
-        username,
         userId,
         children,
     }: {
@@ -194,11 +190,14 @@ export const CardTitle = memo(
                     className="cursor-pointer rounded-full"
                     onClick={() => navigate(`/users/${userId}`)}
                 >
-                    {profilePic ? (
-                        <Avatar src={profilePic} />
+                    <img
+                        src={profilePic}
+                        className="rounded-full aspect-square w-12"
+                    />
+                    {/* {profilePic ? (
                     ) : (
-                        <Avatar {...stringAvatar(username)} />
-                    )}
+                        <img {...stringAvatar(username)} />
+                    )} */}
                 </div>
 
                 <h4

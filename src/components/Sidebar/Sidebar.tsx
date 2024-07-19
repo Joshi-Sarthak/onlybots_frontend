@@ -22,7 +22,7 @@ const Sidebar = () => {
 
     return (
         <>
-            <div className="hidden sm:block w-1/12 sm:w-1/6 md:w-1/5 z-50">
+            <div className="hidden sm:block w-1/12 sm:w-1/6 md:w-1/5 z-50 mr-2">
                 <div className="flex w-1/12 sm:w-1/6 md:w-1/5  bg-stone-950 min-h-screen border-r border-neutral-500 fixed  flex-col justify-between">
                     <div className="ml-2">
                         <Link
@@ -31,11 +31,11 @@ const Sidebar = () => {
                         >
                             OnlyBots
                         </Link>
-                        <div className="flex flex-col items-center text-xs md:text-md lg:text-lg">
-                            <div className="w-full">
+                        <div className="flex flex-col items-center ">
+                            <div className="w-full ">
                                 <Link
                                     to="/users"
-                                    className="flex items-center w-full p-1 sm:py-2 sm:px-4 hover:bg-stone-800 transition duration-300 ease-in-out"
+                                    className="flex items-center w-full p-1 sm:py-2 sm:px-4 sm:text-xs lg:text-lg hover:bg-stone-800 transition duration-300 ease-in-out"
                                 >
                                     <PeopleIcon className="text-white" />
                                     <span className="hidden sm:inline-block text-white sm:ml-3">
@@ -46,7 +46,7 @@ const Sidebar = () => {
                             <div className="w-full">
                                 <Link
                                     to="/posts"
-                                    className="flex items-center w-full p-1 sm:py-2 sm:px-4 hover:bg-stone-800 transition duration-300 ease-in-out"
+                                    className="flex items-center w-full p-1 sm:py-2 sm:px-4 sm:text-xs lg:text-lg hover:bg-stone-800 transition duration-300 ease-in-out"
                                 >
                                     <PostAddIcon className="text-white" />
                                     <span className="hidden sm:inline-block  text-white sm:ml-3">
@@ -59,14 +59,14 @@ const Sidebar = () => {
                     <div className="mb-4 ml-2">
                         <div className="w-full">
                             {simRequested && (
-                                <p className="text-stone-300 text-wrap p-1 sm:py-2 sm:px-4">
+                                <p className="text-stone-300 text-wrap p-1 sm:py-2 sm:px-4 sm:text-xs lg:text-lg ">
                                     Simulation results might take a while...
                                 </p>
                             )}
 
                             <Collapse in={!simRequested && !isRateLimited}>
                                 <div
-                                    className="flex items-center w-full p-1 sm:py-2 sm:px-4 hover:bg-stone-800 transition duration-300 ease-in-out"
+                                    className="flex items-center w-full p-1 sm:py-2 sm:px-4 sm:text-xs lg:text-lg hover:bg-stone-800 transition duration-300 ease-in-out"
                                     onClick={() => {
                                         simulationHandler(
                                             setSimulationResponse,
@@ -79,7 +79,7 @@ const Sidebar = () => {
                                     }}
                                 >
                                     <SmartToyIcon htmlColor="white" />
-                                    <span className="hidden sm:inline-block text-white sm:ml-3">
+                                    <span className="hidden sm:inline-block text-white pr-1 sm:ml-3 sm:text-xs lg:text-lg">
                                         Request simulation
                                     </span>
                                 </div>
@@ -87,9 +87,9 @@ const Sidebar = () => {
                         </div>
                         <Link
                             to="/"
-                            className="flex items-center w-full p-1 sm:py-2 sm:px-4 hover:bg-stone-800 transition duration-300 ease-in-out"
+                            className="flex items-center w-full p-1 sm:py-2 sm:px-4 sm:text-xs lg:text-lg hover:bg-stone-800 transition duration-300 ease-in-out"
                         >
-                            <ExitToAppIcon className="text-white" />
+                            <ExitToAppIcon className="text-white " />
                             <span className="hidden sm:inline-block text-white sm:ml-3">
                                 Exit
                             </span>

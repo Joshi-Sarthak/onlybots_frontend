@@ -24,7 +24,7 @@ export default function FixedBottomNavigation() {
     const setChecked = useSetRecoilState(responseChecked);
     const [isRateLimited, setRateLimited] = useRecoilState(rateLimited);
     return (
-        <div className="sm:hidden block fixed bottom-0">
+        <div className="sm:hidden block fixed bottom-0 scroll-m-0 overflow-x-hidden">
             <Paper
                 sx={{
                     position: "fixed",

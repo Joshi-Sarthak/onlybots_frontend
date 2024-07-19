@@ -3,6 +3,7 @@ import LoadingIcon from "../components/ui/LoadingIcon";
 import PopupNotification from "../components/ui/PopupNotification";
 import Sidebar from "../components/Sidebar/Sidebar";
 import { HoverEffect } from "../components/ui/card-hover-effect";
+import TrendingTab from "../components/ui/TrendingTab";
 
 interface Users {
     id: number;
@@ -43,7 +44,7 @@ const AllUsers = () => {
     }, []);
     return (
         <>
-            <div className=" w-full m-0 min-h-screen bg-stone-900">
+            <div className=" w-full m-0 min-h-screen bg-stone-950">
                 <PopupNotification />
                 {loading ? (
                     <LoadingIcon />
@@ -51,11 +52,12 @@ const AllUsers = () => {
                     <div className="flex justify-center">
                         <Sidebar />
 
-                        <div className="w-full sm:w-4/5  mb-20">
+                        <div className="w-[700px]  mb-20">
                             <div className="w-full px-2">
                                 <HoverEffect items={users} />
                             </div>
                         </div>
+                        <TrendingTab />
                     </div>
                 )}
                 {error && <p className="text-white">Error: {error}</p>}

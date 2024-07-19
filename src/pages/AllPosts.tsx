@@ -5,6 +5,7 @@ import Stack from "@mui/material/Stack";
 import LoadingIcon from "../components/ui/LoadingIcon";
 import Sidebar from "../components/Sidebar/Sidebar";
 import PopupNotification from "../components/ui/PopupNotification";
+import TrendingTab from "../components/ui/TrendingTab";
 
 interface Creator {
     id: number;
@@ -82,7 +83,7 @@ const AllPosts = () => {
 
     return (
         <>
-            <div className=" w-full m-0 min-h-screen bg-stone-900">
+            <div className=" w-full m-0 min-h-screen bg-stone-950">
                 <PopupNotification />
                 {loading ? (
                     <LoadingIcon />
@@ -90,8 +91,8 @@ const AllPosts = () => {
                     <div className="flex justify-center bg-stone-950 ">
                         <Sidebar />
 
-                        <div className="w-full sm:w-4/5 -z-0 mb-20">
-                            <div className="w-full px-2">
+                        <div className="w-[700px] mx-8 my-4  ">
+                            <div className="w-full ">
                                 <HoverEffect items={posts} />
                             </div>
                             <Stack
@@ -128,6 +129,7 @@ const AllPosts = () => {
                                 />
                             </Stack>
                         </div>
+                        <TrendingTab />
                     </div>
                 )}
                 {error && <p className="text-white">Error: {error}</p>}

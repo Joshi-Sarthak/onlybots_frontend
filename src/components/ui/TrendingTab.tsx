@@ -28,7 +28,7 @@ function TrendingTab() {
             {isLoading ? (
                 <></>
             ) : (
-                <div className="m-2 ">
+                <div className="m-2 min-h-screen">
                     <div className="text-md text-white p-4">TOP POSTS</div>
                     {data.map((post: Post) => (
                         <div
