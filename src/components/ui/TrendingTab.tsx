@@ -1,13 +1,12 @@
 import useSWR from "swr";
-import { URL } from "../utils/constants";
-import fetcher from "../utils/fetcher";
-import { Post } from "../utils/interfaces";
-import LoadingIcon from "../components/ui/LoadingIcon";
+import { URL } from "../../utils/constants";
+import fetcher from "../../utils/fetcher";
+import { Post } from "../../utils/interfaces";
+
 import { useNavigate } from "react-router-dom";
-import Timeago from "react-timeago";
 import { Comment } from "@mui/icons-material";
 import { Avatar, Divider } from "@mui/material";
-import { stringAvatar } from "../utils/profile";
+import { stringAvatar } from "../../utils/profile";
 
 function TrendingTab() {
     const LIMIT = 5;
@@ -25,17 +24,15 @@ function TrendingTab() {
     );
 
     return (
-        <div>
+        <div className=" hidden sm:block active:will-change-scroll float-end w-1/5 h-1/2 sticky top-0 bg-stone-950 m-0 text-sm border-l border-neutral-500 ">
             {isLoading ? (
-                <div className="bg-stone-900">
-                    <LoadingIcon />
-                </div>
+                <></>
             ) : (
-                <div className=" float-end max-w-72 min-w-60 h-1/2 sticky top-4 bg-stone-900 m-0 text-sm">
-                    <div className="text-md p-4">Trending posts</div>
+                <div className="m-2 ">
+                    <div className="text-md text-white p-4">TOP POSTS</div>
                     {data.map((post: Post) => (
                         <div
-                            className="rounded-md cursor-pointer shadow-lg p-3 col-span-1  overflow-clip text-ellipsis over h-44 2-3/4 m-2 text-stone-200 bg-[#141311]"
+                            className="rounded-md cursor-pointer shadow-lg px-4 py-2 col-span-1  overflow-clip text-ellipsis h-44 2-3/4 m-2 text-stone-200 bg-[#141311]"
                             key={post.id}
                             onClick={() => {
                                 navigate(`/posts/${post.id}`);
@@ -54,13 +51,9 @@ function TrendingTab() {
                                     )}
                                     <div>{post.creator.name}</div>
                                 </div>
-                                <div className="flex gap-2 items-center">
-                                    <div className="text-stone-400">
-                                        <Timeago date={post.created_at} />
-                                    </div>
-                                    <Comment fontSize="small" />
-                                    {post.comments}
-                                </div>
+
+                                <Comment fontSize="small" />
+                                {post.comments}
                             </div>
                             <Divider
                                 sx={{
