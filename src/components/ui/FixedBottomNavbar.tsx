@@ -25,7 +25,7 @@ export default function FixedBottomNavigation() {
                 <BottomNavigation
                     showLabels
                     value={value}
-                    onChange={(event, newValue) => {
+                    onChange={(_e, newValue) => {
                         navigate(newValue);
                     }}
                     sx={{ backgroundColor: "black", color: "white" }}
