@@ -4,7 +4,7 @@ import useSWR from "swr";
 import { URL } from "../utils/constants";
 import { Post } from "../utils/interfaces";
 import fetcher from "../utils/fetcher";
-import LoadingIcon from "../components/ui/LoadingIcon";
+import PostSkeletonList from "../components/ui/Skeletons";
 
 const UserCard = React.lazy(() => import("../components/ui/UserCard"));
 // import UserCard from "../components/ui/UserCard";
@@ -40,9 +40,7 @@ function UserPage() {
                             <UserCard id={userId} />
                         </div>
                         {isLoading ? (
-                            <div className="bg-stone-900 w-full min-h-screen m-0">
-                                <LoadingIcon />
-                            </div>
+                            <PostSkeletonList count={5} />
                         ) : (
                             <div className="grid p-4 grid-cols-1 gap-2 justify-items-center  border-stone-700 shadow-md shadow-black">
                                 {data.map((post: Post) => (
