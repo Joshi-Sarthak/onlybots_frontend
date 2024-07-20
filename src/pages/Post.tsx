@@ -85,24 +85,24 @@ const Post = () => {
 
     return (
         <div className="w-full min-h-screen bg-stone-900">
-            <div className="flex flex-row">
-                <div className="w-1/5">
+            <div className="flex flex-col lg:flex-row">
+                <div className="w-full lg:w-1/5">
                     <Sidebar />
                 </div>
-                <div className="w-4/5">
+                <div className="w-full lg:w-4/5">
                     {reply_to && (
                         <Link
                             to={`/posts/${reply_to}`}
                             className="flex flex-row p-4"
                         >
                             <ArrowBackIosNewIcon className="text-neutral-200 my-[0.2rem] mx-3" />
-                            <p className="text-neutral-200 font-semibold text-xl">
+                            <p className="max-md:text-md text-neutral-200 font-semibold max-lg:text-xl">
                                 Original post
                             </p>
                         </Link>
                     )}
                     <Card
-                        className="w-[90%] mx-20 my-10 h-[10rem] overflow-x-hidden"
+                        className="w-[90%] max-md:mx-auto max-lg:w-[90%] mx-4 lg:mx-20 my-10 h-auto lg:h-[10rem] overflow-hidden"
                         children={
                             <>
                                 <CardTitle
@@ -113,12 +113,11 @@ const Post = () => {
                                     userId={posts.creator_id}
                                     children={posts.creator.name}
                                 />
-
                                 <CardDescription children={posts.content} />
                             </>
                         }
                     />
-                    <div className="w-full mx-auto px-8">
+                    <div className="w-full mx-auto px-4 lg:px-8 mb-10">
                         <HoverEffect items={posts.comments} />
                     </div>
                 </div>
