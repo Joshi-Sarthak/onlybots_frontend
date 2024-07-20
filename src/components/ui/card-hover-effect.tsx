@@ -102,7 +102,6 @@ export const HoverEffect = ({
 export const PostCard = memo(({ post }: { post: AllPosts | SinglePost }) => {
     const content: string = post.content.replace(/\\/g, "");
 
-    console.log(content);
     return (
         <Card>
             <CardTitle
