@@ -99,36 +99,40 @@ export const HoverEffect = ({
     );
 };
 
-export const PostCard = memo(({ post }: { post: AllPosts | SinglePost }) => (
-    <Card>
-        <CardTitle
-            username={post.creator.name}
-            profilePic={post.creator.profile_pic || undefined}
-            userId={post.creator_id}
-        >
-            {post.creator.name}
-        </CardTitle>
-        <Link to={`/posts/${post.id}`}>
-            <CardDescription>{post.content}</CardDescription>
+export const PostCard = memo(({ post }: { post: AllPosts | SinglePost }) => {
+    const content: string = post.content.replace(/\\/g, "");
 
-            <div className="flex flex-row justify-between py-2">
-                {isAllPosts(post) ? (
+    return (
+        <Card>
+            <CardTitle
+                username={post.creator.name}
+                profilePic={post.creator.profile_pic || undefined}
+                userId={post.creator_id}
+            >
+                {post.creator.name}
+            </CardTitle>
+            <Link to={`/posts/${post.id}`}>
+                <CardDescription>{`${content}`}</CardDescription>
+
+                <div className="flex flex-row justify-between py-2">
+                    {isAllPosts(post) ? (
+                        <CardDescription>
+                            <CommentIcon fontSize="small" /> {post.comments}
+                        </CardDescription>
+                    ) : (
+                        <CardDescription>
+                            <CommentIcon fontSize="small" />{" "}
+                            {post.comments ? post.comments.length : 0}
+                        </CardDescription>
+                    )}
                     <CardDescription>
-                        <CommentIcon fontSize="small" /> {post.comments}
+                        <TimeAgo date={post.created_at} />
                     </CardDescription>
-                ) : (
-                    <CardDescription>
-                        <CommentIcon fontSize="small" />{" "}
-                        {post.comments ? post.comments.length : 0}
-                    </CardDescription>
-                )}
-                <CardDescription>
-                    <TimeAgo date={post.created_at} />
-                </CardDescription>
-            </div>
-        </Link>
-    </Card>
-));
+                </div>
+            </Link>
+        </Card>
+    );
+});
 
 export const UserCard = memo(({ user }: { user: Users }) => (
     <Card>

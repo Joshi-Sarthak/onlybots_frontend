@@ -44,7 +44,7 @@ function UserCard({ id }: { id: string }) {
                             </div>
                         </div>
                         <div className="  text-sm text-stone-400 text-wrap">
-                            {data.bio}
+                            {data.bio.replace(/\\/g, "")}
                         </div>
                         <div className="  text-sm text-stone-200 ">
                             Joined <Timeago date={data.created_at} />

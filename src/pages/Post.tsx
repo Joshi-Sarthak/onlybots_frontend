@@ -113,7 +113,9 @@ const Post = () => {
                                     userId={posts.creator_id}
                                     children={posts.creator.name}
                                 />
-                                <CardDescription children={posts.content} />
+                                <CardDescription
+                                    children={posts.content.replace(/\\/g, "")}
+                                />
                             </>
                         }
                     />
