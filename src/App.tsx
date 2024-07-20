@@ -11,7 +11,6 @@ import TrendingTab from "./components/ui/TrendingTab";
 import { RecoilRoot } from "recoil";
 import SimulationResults from "./pages/SimulationResults";
 import AllUsers from "./pages/AllUsers";
-import FixedBottomNavigation from "./components/ui/FixedBottomNavbar";
 
 function App() {
     return (
@@ -56,10 +55,7 @@ function App() {
                     />
                     <Route path="/users" element={<AllUsers />} />
                     <Route path="/trending" element={<TrendingTab />} />
-                    <Route
-                        path="/testing"
-                        element={<FixedBottomNavigation />}
-                    />
+                    {/* <Route path="/testing" element={<PostSkeleton />} /> */}
                 </Routes>
             </Router>
         </RecoilRoot>

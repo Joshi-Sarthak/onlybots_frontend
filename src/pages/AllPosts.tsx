@@ -2,10 +2,10 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { HoverEffect } from "../components/ui/card-hover-effect";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
-import LoadingIcon from "../components/ui/LoadingIcon";
 import Sidebar from "../components/Sidebar/Sidebar";
 import PopupNotification from "../components/ui/PopupNotification";
 import TrendingTab from "../components/ui/TrendingTab";
+import PostSkeletonList from "../components/ui/Skeletons";
 
 interface Creator {
     id: number;
@@ -85,53 +85,56 @@ const AllPosts = () => {
         <>
             <div className=" w-full m-0 min-h-screen bg-stone-950">
                 <PopupNotification />
-                {loading ? (
-                    <LoadingIcon />
-                ) : (
-                    <div className="flex justify-center bg-stone-950 ">
-                        <Sidebar />
 
-                        <div className="w-[700px] mx-8 my-4  ">
-                            <div className="w-full ">
-                                <HoverEffect items={posts} />
-                            </div>
-                            <Stack
-                                spacing={2}
-                                className="mx-auto"
-                                direction="row"
-                                justifyContent="center"
-                                alignItems="center"
-                                style={{
-                                    marginTop: "20px",
-                                    marginBottom: "40px",
-                                }}
-                            >
-                                <Pagination
-                                    count={totalPages}
-                                    page={page}
-                                    onChange={handlePageChange}
-                                    variant="outlined"
-                                    shape="rounded"
-                                    size="large"
-                                    sx={{
-                                        "& .MuiPaginationItem-root": {
-                                            color: "#fff", // Text color
-                                        },
-                                        "& .MuiPaginationItem-page.Mui-selected":
-                                            {
-                                                backgroundColor: "#fff", // Selected page background color
-                                                color: "#000", // Selected page text color
-                                            },
-                                        "& .MuiPagination-ul": {
-                                            backgroundColor: "#000", // Pagination background color
-                                        },
+                <div className="flex justify-center bg-stone-950 ">
+                    <Sidebar />
+                    <div className="w-[700px] mx-8 my-4  ">
+                        {loading ? (
+                            <PostSkeletonList count={10} />
+                        ) : (
+                            <>
+                                <div className="w-full ">
+                                    <HoverEffect items={posts} />
+                                </div>
+                                <Stack
+                                    spacing={2}
+                                    className="mx-auto"
+                                    direction="row"
+                                    justifyContent="center"
+                                    alignItems="center"
+                                    style={{
+                                        marginTop: "20px",
+                                        marginBottom: "40px",
                                     }}
-                                />
-                            </Stack>
-                        </div>
-                        <TrendingTab />
+                                >
+                                    <Pagination
+                                        count={totalPages}
+                                        page={page}
+                                        onChange={handlePageChange}
+                                        variant="outlined"
+                                        shape="rounded"
+                                        size="large"
+                                        sx={{
+                                            "& .MuiPaginationItem-root": {
+                                                color: "#fff", // Text color
+                                            },
+                                            "& .MuiPaginationItem-page.Mui-selected":
+                                                {
+                                                    backgroundColor: "#fff", // Selected page background color
+                                                    color: "#000", // Selected page text color
+                                                },
+                                            "& .MuiPagination-ul": {
+                                                backgroundColor: "#000", // Pagination background color
+                                            },
+                                        }}
+                                    />
+                                </Stack>
+                            </>
+                        )}
                     </div>
-                )}
+                    <TrendingTab />
+                </div>
+
                 {error && <p className="text-white">Error: {error}</p>}
             </div>
         </>

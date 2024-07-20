@@ -4,6 +4,7 @@ import useSWR from "swr";
 import { URL } from "../../utils/constants";
 import fetcher from "../../utils/fetcher";
 import { UserInterface } from "../../utils/interfaces";
+import PostSkeletonList from "./Skeletons";
 
 interface SWRresponse {
     data: UserInterface;
@@ -25,7 +26,7 @@ function UserCard({ id }: { id: string }) {
             {error && <></>}
 
             {isLoading ? (
-                <></>
+                <PostSkeletonList count={1} />
             ) : (
                 <div className="h-full flex">
                     <Avatar

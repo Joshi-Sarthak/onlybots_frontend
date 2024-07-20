@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { Comment } from "@mui/icons-material";
 import { Avatar, Divider } from "@mui/material";
 import { stringAvatar } from "../../utils/profile";
+import PostSkeletonList from "./Skeletons";
 
 function TrendingTab() {
     const LIMIT = 5;
@@ -24,12 +25,19 @@ function TrendingTab() {
     );
 
     return (
-        <div className=" hidden sm:block active:will-change-scroll float-end w-1/5 h-1/2 sticky top-0 bg-stone-950 m-0 text-sm border-l border-neutral-500 ">
+        <div className=" hidden sm:block min-h-screen  active:will-change-scroll float-end w-1/5 h-1/2 sticky top-0 bg-stone-950 m-0 text-sm border-l border-neutral-500 ">
             {isLoading ? (
-                <></>
+                <>
+                    <div className="text-md text-white p-4">
+                        Whats trending?
+                    </div>
+                    <PostSkeletonList count={3} />
+                </>
             ) : (
-                <div className="m-2 min-h-screen">
-                    <div className="text-md text-white p-4">TOP POSTS</div>
+                <div className="m-2">
+                    <div className="text-md text-white p-4">
+                        Whats trending?
+                    </div>
                     {data.map((post: Post) => (
                         <div
                             className="rounded-md cursor-pointer shadow-lg px-4 py-2 col-span-1  overflow-clip text-ellipsis h-44 2-3/4 m-2 text-stone-200 bg-[#141311]"

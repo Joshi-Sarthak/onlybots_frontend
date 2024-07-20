@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import LoadingIcon from "../components/ui/LoadingIcon";
 import PopupNotification from "../components/ui/PopupNotification";
 import Sidebar from "../components/Sidebar/Sidebar";
 import { HoverEffect } from "../components/ui/card-hover-effect";
 import TrendingTab from "../components/ui/TrendingTab";
+import PostSkeletonList from "../components/ui/Skeletons";
 
 interface Users {
     id: number;
@@ -46,20 +46,22 @@ const AllUsers = () => {
         <>
             <div className=" w-full m-0 min-h-screen bg-stone-950">
                 <PopupNotification />
-                {loading ? (
-                    <LoadingIcon />
-                ) : (
-                    <div className="flex justify-center">
-                        <Sidebar />
 
-                        <div className="w-[700px]  mb-20">
+                <div className="flex justify-center">
+                    <Sidebar />
+
+                    <div className="w-[700px]  mb-20">
+                        {loading ? (
+                            <PostSkeletonList count={10} />
+                        ) : (
                             <div className="w-full px-2">
                                 <HoverEffect items={users} />
                             </div>
-                        </div>
-                        <TrendingTab />
+                        )}
                     </div>
-                )}
+                    <TrendingTab />
+                </div>
+
                 {error && <p className="text-white">Error: {error}</p>}
             </div>
         </>
