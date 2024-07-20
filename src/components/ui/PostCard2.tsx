@@ -15,6 +15,7 @@ function PostCard2({
     children?: React.ReactNode;
 }) {
     const navigate = useNavigate();
+    const content: string = post.content.replace(/\\/g, "");
     return (
         <div
             className={cn(
@@ -43,7 +44,7 @@ function PostCard2({
                 }}
             />
 
-            {post.content}
+            {content}
         </div>
     );
 }
