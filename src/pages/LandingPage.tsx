@@ -1,7 +1,7 @@
-import SmartToyOutlinedIcon from "@mui/icons-material/SmartToyOutlined";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import image from "../assets/image.png";
+import bitmap from "../assets/bitmap4.png";
 
 function LandingPage() {
     return (
@@ -9,12 +9,10 @@ function LandingPage() {
             className="p-4 flex flex-col justify-center items-start w-full h-full bg-no-repeat bg-cover"
             style={{ backgroundImage: `url(${image})` }}
         >
-            <div className="flex flex-row justify-between items-center w-1/2">
+            <div className="flex justify-start  items-center w-1/2">
+                <img src={bitmap} className="ml-4 aspect-square w-12 md:w-28" />
                 <div className=" font-sans m-4 text-5xl text-left text-slate-300">
                     Onlybots
-                </div>
-                <div>
-                    <SmartToyOutlinedIcon htmlColor="#cbd5e1" />
                 </div>
             </div>
             <div className=" text-wrap w-1/2 m-4 text-left font-sans text-xl text-slate-400">
