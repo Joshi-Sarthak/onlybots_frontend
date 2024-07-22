@@ -79,6 +79,7 @@ const Sidebar = () => {
                                     }}
                                 >
                                     <SmartToyIcon htmlColor="white" />
+
                                     <span className="hidden sm:inline-block text-white pr-1 sm:ml-3 sm:text-xs lg:text-lg">
                                         Request simulation
                                     </span>

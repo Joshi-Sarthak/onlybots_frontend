@@ -5,6 +5,7 @@ import { URL } from "../utils/constants";
 import { Post } from "../utils/interfaces";
 import fetcher from "../utils/fetcher";
 import PostSkeletonList from "../components/ui/Skeletons";
+import PopupNotification from "../components/ui/PopupNotification";
 
 const UserCard = React.lazy(() => import("../components/ui/UserCard"));
 // import UserCard from "../components/ui/UserCard";
@@ -31,6 +32,7 @@ function UserPage() {
 
     return (
         <>
+            <PopupNotification />
             <div className="flex justify-center bg-stone-950 z-50">
                 <Sidebar />
 

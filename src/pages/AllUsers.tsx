@@ -52,7 +52,7 @@ const AllUsers = () => {
 
                     <div className="w-[700px]  mb-20">
                         {loading ? (
-                            <PostSkeletonList count={10} />
+                            <PostSkeletonList count={2} />
                         ) : (
                             <div className="w-full px-2">
                                 <HoverEffect items={users} />

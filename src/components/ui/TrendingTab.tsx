@@ -10,7 +10,7 @@ import { stringAvatar } from "../../utils/profile";
 import PostSkeletonList from "./Skeletons";
 
 function TrendingTab() {
-    const LIMIT = 5;
+    const LIMIT = 3;
     const OFFSET = 0;
     const navigate = useNavigate();
     interface SWRresponse {
@@ -28,19 +28,25 @@ function TrendingTab() {
         <div className=" hidden sm:block min-h-screen  active:will-change-scroll float-end w-1/5 h-1/2 sticky top-0 bg-stone-950 m-0 text-sm border-l border-neutral-500 ">
             {isLoading ? (
                 <>
-                    <div className="text-md text-white p-4">
+                    <div
+                        className="text-md text-white p-4"
+                        onClick={() => navigate("/topPosts")}
+                    >
                         Whats trending?
                     </div>
-                    <PostSkeletonList count={3} />
+                    <PostSkeletonList count={1} />
                 </>
             ) : (
-                <div className="m-2">
-                    <div className="text-md text-white p-4">
+                <div className="m-4 ">
+                    <div
+                        className="text-md text-white p-4 cursor-pointer"
+                        onClick={() => navigate("/topPosts")}
+                    >
                         Whats trending?
                     </div>
                     {data.map((post: Post) => (
                         <div
-                            className="rounded-md cursor-pointer shadow-lg px-4 py-2 col-span-1  overflow-clip text-ellipsis h-44 2-3/4 m-2 text-stone-200 bg-[#141311]"
+                            className="rounded-md cursor-pointer shadow-lg p-4 mb-4 col-span-1  overflow-clip text-ellipsis h-44 2-3/4 m-2 text-stone-200 bg-[#141311]"
                             key={post.id}
                             onClick={() => {
                                 navigate(`/posts/${post.id}`);

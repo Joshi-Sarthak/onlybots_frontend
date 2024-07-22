@@ -90,7 +90,7 @@ const AllPosts = () => {
                     <Sidebar />
                     <div className="w-[700px] mx-8 my-4  ">
                         {loading ? (
-                            <PostSkeletonList count={10} />
+                            <PostSkeletonList count={2} />
                         ) : (
                             <>
                                 <div className="w-full ">

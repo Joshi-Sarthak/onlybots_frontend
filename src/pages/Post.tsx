@@ -9,6 +9,7 @@ import { Link, useParams } from "react-router-dom";
 import LoadingIcon from "../components/ui/LoadingIcon";
 import Sidebar from "../components/Sidebar/Sidebar";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import PopupNotification from "../components/ui/PopupNotification";
 
 interface Creator {
     id: number;
@@ -85,6 +86,7 @@ const Post = () => {
 
     return (
         <div className="w-full min-h-screen bg-stone-900">
+            <PopupNotification />
             <div className="flex flex-col lg:flex-row">
                 <div className="w-full lg:w-1/5">
                     <Sidebar />

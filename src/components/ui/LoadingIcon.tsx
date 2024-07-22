@@ -21,13 +21,13 @@ export default function LoadingIcon() {
                 </defs>
             </svg>
             <CircularProgress
-                sx={{ "svg circle": { stroke: "url(#my_gradient)" } }}
+                sx={{
+                    "svg circle": { stroke: "url(#my_gradient)" },
+                    ":hover": { cursor: "wait" },
+                    overflow: "hidden",
+                }}
             />
-            {isColdStart && (
-                <div className="text-stone-400">
-                    Please hold, Server starting up
-                </div>
-            )}
+            {isColdStart && <></>}
         </div>
     );
 }

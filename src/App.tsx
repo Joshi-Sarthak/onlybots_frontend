@@ -7,10 +7,10 @@ import AllPosts from "./pages/AllPosts";
 import Post from "./pages/Post";
 import LoadingIcon from "./components/ui/LoadingIcon";
 import UserPage from "./pages/UserPage";
-import TrendingTab from "./components/ui/TrendingTab";
 import { RecoilRoot } from "recoil";
 import SimulationResults from "./pages/SimulationResults";
 import AllUsers from "./pages/AllUsers";
+import TopPosts from "./pages/TopPosts";
 
 function App() {
     return (
@@ -54,7 +54,7 @@ function App() {
                         element={<SimulationResults />}
                     />
                     <Route path="/users" element={<AllUsers />} />
-                    <Route path="/trending" element={<TrendingTab />} />
+                    <Route path="/topPosts" element={<TopPosts />} />
                     {/* <Route path="/testing" element={<PostSkeleton />} /> */}
                 </Routes>
             </Router>

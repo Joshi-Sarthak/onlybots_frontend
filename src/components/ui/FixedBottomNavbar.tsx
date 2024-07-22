@@ -14,6 +14,7 @@ import {
     simRequestSent,
     simulationResponse,
 } from "../../states";
+import LoadingIcon from "./LoadingIcon";
 export default function FixedBottomNavigation() {
     const [value, setValue] = useState(0);
 
@@ -24,14 +25,14 @@ export default function FixedBottomNavigation() {
     const setChecked = useSetRecoilState(responseChecked);
     const [isRateLimited, setRateLimited] = useRecoilState(rateLimited);
     return (
-        <div className="sm:hidden block fixed bottom-0 scroll-m-0 overflow-x-hidden">
+        <div className="sm:hidden block fixed bottom-0 scroll-m-0 overflow-hidden">
             <Paper
                 sx={{
                     position: "fixed",
                     bottom: 0,
                     left: 0,
                     right: 0,
-                    overflow: "auto",
+                    overflow: "hidden",
                 }}
                 elevation={3}
             >
@@ -41,7 +42,11 @@ export default function FixedBottomNavigation() {
                     onChange={(_e, newValue) => {
                         if (typeof newValue === "string") navigate(newValue);
                     }}
-                    sx={{ backgroundColor: "black", color: "white" }}
+                    sx={{
+                        backgroundColor: "black",
+                        color: "white",
+                        overflow: "hidden",
+                    }}
                 >
                     <BottomNavigationAction
                         label="Users"
@@ -56,7 +61,7 @@ export default function FixedBottomNavigation() {
                         sx={{ backgroundColor: "black", color: "white" }}
                     />
                     <BottomNavigationAction
-                        label="Simulate"
+                        label={simRequested ? "" : "Simulate"}
                         onClick={() => {
                             !isRateLimited &&
                                 !simRequested &&
@@ -66,17 +71,25 @@ export default function FixedBottomNavigation() {
                                     setRequestSent,
                                     setRateLimited
                                 );
-                            setRequestSent(true);
-                            setRateLimited(true);
+                            !isRateLimited &&
+                                !simRequested &&
+                                setRequestSent(true);
+                            !isRateLimited &&
+                                !simRequested &&
+                                setRateLimited(true);
                         }}
                         icon={
-                            <SmartToyIcon
-                                htmlColor={
-                                    !isRateLimited && !simRequested
-                                        ? "white"
-                                        : "grey"
-                                }
-                            />
+                            simRequested ? (
+                                <div>
+                                    <LoadingIcon />
+                                </div>
+                            ) : (
+                                <SmartToyIcon
+                                    htmlColor={
+                                        !isRateLimited ? "white" : "grey"
+                                    }
+                                />
+                            )
                         }
                         sx={{
                             backgroundColor: "black",
@@ -84,11 +97,17 @@ export default function FixedBottomNavigation() {
                                 !isRateLimited && !simRequested
                                     ? "white"
                                     : "grey",
+                            ":hover": {
+                                cursor: `${
+                                    isRateLimited ? "wait" : "pointer"
+                                }}`,
+                                overflow: "hidden",
+                            },
                         }}
                     />
                     <BottomNavigationAction
                         label="Trending"
-                        value={"/trending"}
+                        value={"/topPosts"}
                         icon={<WhatshotIcon />}
                         sx={{ backgroundColor: "black", color: "white" }}
                     />
