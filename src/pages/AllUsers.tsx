@@ -50,7 +50,10 @@ const AllUsers = () => {
                 <div className="flex justify-center">
                     <Sidebar />
 
-                    <div className="w-[700px]  mb-20">
+                    <div className="w-[700px] mx-8 my-4 ">
+                        <div className="flex justify-center text-2xl text-white pb-4 border-b border-stone-400">
+                            Users
+                        </div>
                         {loading ? (
                             <PostSkeletonList count={2} />
                         ) : (

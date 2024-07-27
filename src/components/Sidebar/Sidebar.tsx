@@ -22,7 +22,7 @@ const Sidebar = () => {
 
     return (
         <>
-            <div className="hidden sm:block w-1/12 sm:w-1/6 md:w-1/5 z-50 mr-2">
+            <div className="hidden sm:block w-1/12 sm:w-1/6 md:w-1/5 z-50 ">
                 <div className="flex w-1/12 sm:w-1/6 md:w-1/5  bg-stone-950 min-h-screen border-r border-neutral-500 fixed  flex-col justify-between">
                     <div className="ml-2">
                         <Link
@@ -63,7 +63,6 @@ const Sidebar = () => {
                                     Simulation results might take a while...
                                 </p>
                             )}
-
                             <Collapse in={!simRequested && !isRateLimited}>
                                 <div
                                     className="flex items-center w-full p-1 sm:py-2 sm:px-4 sm:text-xs lg:text-lg hover:bg-stone-800 transition duration-300 ease-in-out"

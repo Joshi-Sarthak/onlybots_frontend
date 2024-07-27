@@ -89,6 +89,9 @@ const AllPosts = () => {
                 <div className="flex justify-center bg-stone-950 ">
                     <Sidebar />
                     <div className="w-[700px] mx-8 my-4  ">
+                        <div className="flex justify-center text-2xl text-white pb-4 border-b border-stone-400">
+                            Posts
+                        </div>
                         {loading ? (
                             <PostSkeletonList count={2} />
                         ) : (

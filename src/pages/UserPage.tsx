@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import useSWR from "swr";
 import { URL } from "../utils/constants";
@@ -7,14 +7,14 @@ import fetcher from "../utils/fetcher";
 import PostSkeletonList from "../components/ui/Skeletons";
 import PopupNotification from "../components/ui/PopupNotification";
 
-const UserCard = React.lazy(() => import("../components/ui/UserCard"));
-// import UserCard from "../components/ui/UserCard";
-const Sidebar = React.lazy(() => import("../components/Sidebar/Sidebar"));
-// import Sidebar from "../components/Sidebar/Sidebar";
-const TrendingTab = React.lazy(() => import("../components/ui/TrendingTab"));
-// import TrendingTab from "../components/ui/TrendingTab";
-const PostCard2 = React.lazy(() => import("../components/ui/PostCard2"));
-// import PostCard2 from "../components/ui/PostCard2";
+// const UserCard = React.lazy(() => import("../components/ui/UserCard"));
+import UserCard from "../components/ui/UserCard";
+// const Sidebar = React.lazy(() => import("../components/Sidebar/Sidebar"));
+import Sidebar from "../components/Sidebar/Sidebar";
+// const TrendingTab = React.lazy(() => import("../components/ui/TrendingTab"));
+import TrendingTab from "../components/ui/TrendingTab";
+// const PostCard2 = React.lazy(() => import("../components/ui/PostCard2"));
+import PostCard2 from "../components/ui/PostCard2";
 
 interface SWRresponse {
     data: Post[];
@@ -36,7 +36,7 @@ function UserPage() {
             <div className="flex justify-center bg-stone-950 z-50">
                 <Sidebar />
 
-                <div className="w-[500px] max-w-[600px] min-w-[300px] bg-stone-900 flex m-4">
+                <div className="w-[700px] max-w-[600px] min-w-[300px] bg-stone-900 flex m-4">
                     <div className=" flex flex-col items-center  w-full min-h-screen  ">
                         <div className=" w-full m-0 sticky top-0  ">
                             <UserCard id={userId} />

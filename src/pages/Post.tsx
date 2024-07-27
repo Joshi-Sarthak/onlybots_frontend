@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import {
     Card,
     CardDescription,
@@ -6,10 +5,28 @@ import {
     HoverEffect,
 } from "../components/ui/card-hover-effect";
 import { Link, useParams } from "react-router-dom";
-import LoadingIcon from "../components/ui/LoadingIcon";
 import Sidebar from "../components/Sidebar/Sidebar";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import PopupNotification from "../components/ui/PopupNotification";
+import useSWR from "swr";
+import { URL } from "../utils/constants";
+import fetcher from "../utils/fetcher";
+import PostSkeletonList from "../components/ui/Skeletons";
+// import {forwardRef} from "react"
+// import { SimpleTreeView } from "@mui/x-tree-view/SimpleTreeView";
+// import {
+//     TreeItem2Checkbox,
+//     TreeItem2Content,
+//     TreeItem2GroupTransition,
+//     TreeItem2Icon,
+//     TreeItem2IconContainer,
+//     TreeItem2Label,
+//     TreeItem2Provider,
+//     TreeItem2Root,
+//     UseTreeItem2Parameters,
+// } from "@mui/x-tree-view";
+// import { useTreeItem2 } from "@mui/x-tree-view/useTreeItem2/useTreeItem2";
+// import { Box, styled } from "@mui/material";
 
 interface Creator {
     id: number;
@@ -28,106 +45,124 @@ interface SinglePost {
     comments: Array<SinglePost>;
 }
 
+interface SWRresponse {
+    data: SinglePost;
+    error: any;
+    isLoading: boolean;
+}
+
 const Post = () => {
     const { id } = useParams<{ id: string }>();
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
-    const [posts, setPosts] = useState<SinglePost | null>(null);
-    const [reply_to, setReply_to] = useState<number | null>(null);
-
-    useEffect(() => {
-        setLoading(true);
-        setError(null);
-
-        const fetchPosts = async () => {
-            try {
-                const response = await fetch(
-                    `https://onlybots.onrender.com/posts/${id}`
-                );
-                if (!response.ok) {
-                    throw new Error("Unexpected error occurred");
-                }
-                const data: SinglePost = await response.json();
-                setPosts(data);
-                setReply_to(data.reply_to);
-            } catch (error) {
-                setError("Unexpected error occurred");
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchPosts();
-    }, [id]);
-
-    if (loading) {
-        return (
-            <div className="w-full min-h-screen bg-stone-900">
-                <LoadingIcon />
-            </div>
-        );
-    }
-
-    if (error) {
-        return (
-            <div className="w-full min-h-screen bg-stone-900 ">
-                <p className="text-white">Unexpected error occurred</p>
-            </div>
-        );
-    }
-
-    if (!posts) {
-        return (
-            <div className="w-full min-h-screen bg-stone-900 ">
-                <p className="text-white">No posts found</p>
-            </div>
-        );
-    }
-
+    const { data, error, isLoading }: SWRresponse = useSWR(
+        `${URL}posts/${id}`,
+        fetcher
+    );
     return (
         <div className="w-full min-h-screen bg-stone-900">
-            <PopupNotification />
-            <div className="flex flex-col lg:flex-row">
-                <div className="w-full lg:w-1/5">
-                    <Sidebar />
+            {error && (
+                <div className="w-full min-h-screen bg-stone-900 ">
+                    <p className="text-white">Unexpected error occurred</p>
                 </div>
-                <div className="w-full lg:w-4/5">
-                    {reply_to && (
-                        <Link
-                            to={`/posts/${reply_to}`}
-                            className="flex flex-row p-4"
-                        >
-                            <ArrowBackIosNewIcon className="text-neutral-200 my-[0.2rem] mx-3" />
-                            <p className="max-md:text-md text-neutral-200 font-semibold max-lg:text-xl">
-                                Original post
-                            </p>
-                        </Link>
+            )}
+            <PopupNotification />
+            <div className="flex justify-center bg-stone-950 min-h-screen">
+                <Sidebar />
+                <div className="w-[900px] border-r border-stone-400">
+                    {isLoading ? (
+                        <>
+                            <PostSkeletonList count={3} />
+                        </>
+                    ) : (
+                        <>
+                            {data.reply_to && (
+                                <Link
+                                    to={`/posts/${data.reply_to}`}
+                                    className="flex flex-row p-4"
+                                >
+                                    <ArrowBackIosNewIcon className="text-neutral-200 my-[0.2rem] mx-3" />
+                                    <p className="max-md:text-md text-neutral-200 font-semibold max-lg:text-xl">
+                                        Original post
+                                    </p>
+                                </Link>
+                            )}
+                            {/* "w-[500px] mx-auto max-lg:w-[90%] my-10 h-auto lg:h-[10rem] " */}
+                            <Card
+                                className=" ml-40 mx-auto my-4 mt-8 w-fit h-fit"
+                                children={
+                                    <>
+                                        <CardTitle
+                                            username={data.creator.name}
+                                            profilePic={
+                                                data.creator.profile_pic ||
+                                                undefined
+                                            }
+                                            userId={data.creator_id}
+                                            children={data.creator.name}
+                                        />
+                                        <CardDescription
+                                            children={data.content.replace(
+                                                /\\/g,
+                                                ""
+                                            )}
+                                        />
+                                    </>
+                                }
+                            />
+
+                            <div className=" w-full text-white text-lg p-4 px-12 border-t border-b border-b-stone-500 border-stone-300"></div>
+                            <div className="w-full mx-auto px-4 lg:px-8 mb-10">
+                                <HoverEffect items={data.comments} />
+                            </div>
+                        </>
                     )}
-                    <Card
-                        className="w-[90%] max-md:mx-auto max-lg:w-[90%] mx-4 lg:mx-20 my-10 h-auto lg:h-[10rem] overflow-hidden"
-                        children={
-                            <>
-                                <CardTitle
-                                    username={posts.creator.name}
-                                    profilePic={
-                                        posts.creator.profile_pic || undefined
-                                    }
-                                    userId={posts.creator_id}
-                                    children={posts.creator.name}
-                                />
-                                <CardDescription
-                                    children={posts.content.replace(/\\/g, "")}
-                                />
-                            </>
-                        }
-                    />
-                    <div className="w-full mx-auto px-4 lg:px-8 mb-10">
-                        <HoverEffect items={posts.comments} />
-                    </div>
                 </div>
             </div>
         </div>
     );
 };
+
+// Future upgrade ?
+// const CustomTreeItemContent = styled(TreeItem2Content)(({ theme }) => ({
+//     padding: theme.spacing(0.5, 1),
+// }));
+// interface CustomTreeItemProps
+//     extends Omit<UseTreeItem2Parameters, "rootRef">,
+//         Omit<React.HTMLAttributes<HTMLLIElement>, "onFocus"> {}
+
+// const CustomTreeItem = forwardRef(function CustomTreeItem(
+//     props: CustomTreeItemProps,
+//     ref: React.Ref<HTMLLIElement>
+// ) {
+//     const { id, itemId, label, disabled, children, ...other } = props;
+
+//     const {
+//         getRootProps,
+//         getContentProps,
+//         getIconContainerProps,
+//         getCheckboxProps,
+//         getLabelProps,
+//         getGroupTransitionProps,
+//         status,
+//     } = useTreeItem2({ id, itemId, children, label, disabled, rootRef: ref });
+
+//     return (
+//         <TreeItem2Provider itemId={itemId}>
+//             <TreeItem2Root {...getRootProps(other)}>
+//                 <CustomTreeItemContent {...getContentProps()}>
+//                     <TreeItem2IconContainer {...getIconContainerProps()}>
+//                         <TreeItem2Icon status={status} />
+//                     </TreeItem2IconContainer>
+//                     <TreeItem2Checkbox {...getCheckboxProps()} />
+//                     <Box sx={{ flexGrow: 1, display: "flex", gap: 1 }}>
+//                         <TreeItem2Label {...getLabelProps()} />
+//                     </Box>
+//                 </CustomTreeItemContent>
+//                 {children && (
+//                     <TreeItem2GroupTransition {...getGroupTransitionProps()} />
+//                 )}
+//             </TreeItem2Root>
+//         </TreeItem2Provider>
+//     );
+// });
 
 export default Post;
