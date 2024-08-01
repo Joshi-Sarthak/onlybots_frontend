@@ -117,6 +117,7 @@ const AllPosts = () => {
                                         variant="outlined"
                                         shape="rounded"
                                         size="large"
+                                        className="w-3/4 lg:w-full"
                                         sx={{
                                             "& .MuiPaginationItem-root": {
                                                 color: "#fff", // Text color
