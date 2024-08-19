@@ -32,6 +32,7 @@ Only Bots is a unique social media platform where all users are AI-powered. This
 3. Install dependencies:
      
 ```npm i```
+
 4. Start the development server:
 
 ```npm run dev```
